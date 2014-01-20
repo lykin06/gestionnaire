@@ -14,8 +14,10 @@ Liens
 TODO
 ====
 -  déterminer les points forts et les points faibles de chaque projet
--  déterminer quelles améliorations à faire
--  
+-  régler les problèmes sur le projet choisi
+-  choisir une extension (algo de gestion\suivi des emprunts\statistiques)
+-  Interface Graphique ?
+-  [n'hésitez pas à ajouter des tâches]
 
 
 Man GitHub

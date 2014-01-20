@@ -14,10 +14,10 @@ Man GitHub
 ==========
 
 initialisation :
-1)  ouvrez le terminal
-2)  (si le logiciel n'est pas installé) tapez la commande "gitg" et installez le logiciel requis.
-3)  créez un nouveau dossier "gestionnaire" dans votre workspace Java
-4)  déplacez-vous dans ce dossier
-5)  tapez la ligne suivante : git clone https://github.com/Lykin06/gestionnaire
+-  ouvrez le terminal
+-  (si le logiciel n'est pas installé) tapez la commande "gitg" et installez le logiciel requis.
+-  créez un nouveau dossier "gestionnaire" dans votre workspace Java
+-  déplacez-vous dans ce dossier
+-  tapez la ligne suivante : git clone https://github.com/Lykin06/gestionnaire
 
 

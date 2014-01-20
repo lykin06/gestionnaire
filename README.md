@@ -16,9 +16,9 @@ Man GitHub
 initialisation :
 -  ouvrez le terminal
 -  (si le logiciel n'est pas installé) tapez la commande "gitg" et installez le logiciel requis.
--  créez un nouveau dossier "gestionnaire" dans votre workspace Java
--  déplacez-vous dans ce dossier
+-  déplcez-vous dans votre workspace Java
 -  tapez la ligne suivante : git clone https://github.com/Lykin06/gestionnaire
+-  sous eclipse créez un nouveau projet et donnez-lui le nom "gestionnaire"
 
 
 commit :

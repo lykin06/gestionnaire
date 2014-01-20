@@ -11,6 +11,13 @@ Liens
 - rapport : https://www.writelatex.com/665920vsfddt#/1405529/
 
 
+TODO
+====
+-  déterminer les points forts et les points faibles de chaque projet
+-  déterminer quelles améliorations à faire
+-  
+
+
 Man GitHub
 ==========
 

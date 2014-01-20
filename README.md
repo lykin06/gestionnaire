@@ -4,10 +4,11 @@ gestionnaire
 Projet Java de fin de semestre - Objetif : améliorer un logiciel de gestion d'emprun
 
 
-Sujets
+Liens
 ======
-- mini-projet : http://moodle.i3s.unice.fr/mod/assign/view.php?id=975
-- projet : http://moodle.i3s.unice.fr/mod/assign/view.php?id=1252
+- sujet mini-projet : http://moodle.i3s.unice.fr/mod/assign/view.php?id=975
+- sujet projet : http://moodle.i3s.unice.fr/mod/assign/view.php?id=1252
+- rapport : https://www.writelatex.com/665920vsfddt#/1405529/
 
 
 Man GitHub

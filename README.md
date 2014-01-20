@@ -21,3 +21,12 @@ initialisation :
 -  tapez la ligne suivante : git clone https://github.com/Lykin06/gestionnaire
 
 
+commit :
+-  sauvegardez votre travail dans un dossier temporaire en cas de problèmes
+-  vérifiez qu'ancun nouveau commit n'a été fait entre temps
+-  si c'est le cas : tapez la commande "git pull"
+-  tapez la commande "gitg" et vérifiez votre commit dans l'onglet "commit"
+-  tapez la commande "git push" et entrez vos identifiants.
+-  vérifiez sur le site si le commit a marché
+
+

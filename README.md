@@ -17,7 +17,7 @@ initialisation :
 -  ouvrez le terminal
 -  (si le logiciel n'est pas installé) tapez la commande "gitg" et installez le logiciel requis.
 -  déplcez-vous dans votre workspace Java
--  tapez la ligne suivante : git clone https://github.com/Lykin06/gestionnaire
+-  tapez la ligne suivante : git clone https://github.com/Lykin06/gestionnaire.git
 -  sous eclipse créez un nouveau projet et donnez-lui le nom "gestionnaire"
 
 

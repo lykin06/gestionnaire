@@ -3,7 +3,7 @@ package Config;
 /**
  * Contains globals variable modeling management
  * 
- * @author Amir BEN SLIMANE
+ * @author Aurelien COLOMBET
  */
 public class Config {
 	public static final int DUREE_EMPRUNT_CAMERA = 7;

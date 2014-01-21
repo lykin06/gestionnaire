@@ -18,7 +18,7 @@ import Personnel.Unknown;
 /**
  * AdminMenu class
  * 
- * @author Amir BEN SLIMANE
+ * @author Aurelien COLOMBET
  */
 public class AdminMenu {
 	private Manager manager;

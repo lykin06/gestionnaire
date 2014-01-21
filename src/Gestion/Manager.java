@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * Class Manager
  * 
- * @author Amir BEN SLIMANE
+ * @author Aurelien COLOMBET
  * 
  */
 public class Manager {

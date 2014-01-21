@@ -5,7 +5,7 @@ import Config.Config;
 /**
  * Class representing the Phones.
  * 
- * @author Aurélien Colombet
+ * @author Aurelien COLOMBET
  * 
  */
 public class Phone extends WithOS {

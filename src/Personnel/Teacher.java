@@ -3,7 +3,7 @@ package Personnel;
 /**
  * Class Studient.
  * 
- * @author Amir BEN SLIMANE
+ * @author Aurelien COLOMBET
  * 
  */
 public class Teacher extends Borrower {

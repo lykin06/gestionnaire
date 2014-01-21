@@ -3,7 +3,7 @@ package Personnel;
 /**
  * Class Administrator
  * 
- * @author Amir BEN SLIMANE
+ * @author Aurelien COLOMBET
  * 
  */
 public class Administrator extends Personnel {

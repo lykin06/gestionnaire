@@ -11,7 +11,7 @@ import Personnel.Unknown;
 /**
  * Login class
  * 
- * @author Amir BEN SLIMANE
+ * @author Aurelien COLOMBET
  */
 public class Login {
     private Database bdd;

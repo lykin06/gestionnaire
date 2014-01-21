@@ -5,7 +5,7 @@ import Config.Config;
 /**
  * Class representing the Cameras.
  * 
- * @author Aurélien Colombet
+ * @author Aurelien COLOMBET
  * 
  */
 public class Camera extends Material {

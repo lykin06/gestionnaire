@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Class Personnel
  * 
- * @author Amir BEN SLIMANE
+ * @author Aurelien COLOMBET
  * 
  */
 public class Personnel implements Serializable {

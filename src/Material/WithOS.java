@@ -3,7 +3,7 @@ package Material;
 /**
  * Class representing the Objects with OS.
  * 
- * @author Aurélien Colombet
+ * @author Aurelien COLOMBET
  * 
  */
 public class WithOS extends Material {

@@ -15,7 +15,7 @@ import Personnel.Student;
 /**
  * BorrowerMenu class
  * 
- * @author Amir BEN SLIMANE
+ * @author Aurelien COLOMBET
  */
 public class BorrowerMenu {
     private Database database;

@@ -8,7 +8,7 @@ import Personnel.Borrower;
 /**
  * Material is the class representing all the Objects of the stock.
  * 
- * @author Aurélien Colombet
+ * @author Aurelien COLOMBET
  * 
  */
 public class Material implements Serializable {

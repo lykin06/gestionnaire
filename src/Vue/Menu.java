@@ -7,7 +7,7 @@ import Personnel.Personnel;
 /**
  * Menu class
  * 
- * @author Amir BEN SLIMANE
+ * @author Aurelien COLOMBET
  */
 public class Menu {
 	private Database database;

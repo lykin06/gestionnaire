@@ -5,7 +5,7 @@ import Config.Config;
 /**
  * Class representing the Laptops.
  * 
- * @author Aurélien Colombet
+ * @author Aurelien COLOMBET
  * 
  */
 public class Laptop extends WithOS {

@@ -13,7 +13,7 @@ import Serialization.Data;
 /**
  * Class ListMaterial
  * 
- * @author Amir BEN SLIMANE
+ * @author Aurelien COLOMBET
  * 
  */
 public class ListMaterial {

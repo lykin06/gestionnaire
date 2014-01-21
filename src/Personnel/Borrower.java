@@ -3,7 +3,7 @@ package Personnel;
 /**
  * Class Borrower
  * 
- * @author Amir BEN SLIMANE
+ * @author Aurelien COLOMBET
  * 
  */
 public class Borrower extends Personnel {

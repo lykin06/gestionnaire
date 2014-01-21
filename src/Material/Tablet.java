@@ -5,7 +5,7 @@ import Config.Config;
 /**
  * Class representing the Tablets.
  * 
- * @author Aurélien Colombet
+ * @author Aurelien COLOMBET
  * 
  */
 public class Tablet extends WithOS {

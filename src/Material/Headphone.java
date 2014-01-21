@@ -5,7 +5,7 @@ import Config.Config;
 /**
  * Class representing the Headphones.
  * 
- * @author Aurélien Colombet
+ * @author Aurelien COLOMBET
  * 
  */
 public class Headphone extends Material {

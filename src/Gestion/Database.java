@@ -12,7 +12,7 @@ import Serialization.Text;
 /**
  * Generate user's list
  * 
- * @author Amir BEN SLIMANE
+ * @author Aurelien COLOMBET
  * 
  */
 public class Database {

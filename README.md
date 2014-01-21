@@ -38,6 +38,6 @@ commit :
 -  tapez la commande "gitg" et vérifiez votre commit dans l'onglet "commit"
 -  tapez la commande "git push" et entrez vos identifiants.
 -  vérifiez sur le site si le commit a marché
-test
+second test
 
 

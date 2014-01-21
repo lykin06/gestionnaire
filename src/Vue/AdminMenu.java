@@ -30,10 +30,10 @@ public class AdminMenu {
     private ListReservations listReservations;
 
     public AdminMenu(Database database) {
-        this.setManager(new Manager());
-        this.setDatabase(database);
+        this.manager=new Manager();
+        this.database=database;
         this.setListMaterial(new ListMaterial());
-        this.setListReservations(new ListReservations());
+        this.listReservations=new ListReservations();
         if (this.getListMaterial().getMaterials() == null) {
             this.getListMaterial().reinitialize();
         }
@@ -207,9 +207,9 @@ public class AdminMenu {
     }
 
     private void managementLoan() {
-        ArrayList<Reservation> res = this.getListReservations()
+        ArrayList<Reservation> res = this.listReservations
                 .getReservations(), resAuthorized = new ArrayList<>();
-        if (resAuthorized.isEmpty()) {
+        if (res.isEmpty()) {
             System.out.println("Aucune demande de pret.");
         } else {
             int cpt = 0;

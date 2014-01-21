@@ -21,9 +21,6 @@ import Personnel.Unknown;
  * @author Amir BEN SLIMANE
  */
 public class AdminMenu {
-	// TODO ajouter les unknown et les faire valider par l'admin
-	// TODO choisir un identifiant a un inconnu
-
 	private Manager manager;
 	private Database database;
 	private ListMaterial listMaterial;

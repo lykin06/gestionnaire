@@ -239,7 +239,7 @@ public class AdminMenu {
 		Personnel userChanged = null;
 		boolean found = false;
 
-		ArrayList<Student> studients = this.getDatabase().getStudients();
+		ArrayList<Student> studients = this.getDatabase().getStudents();
 		for (int i = 0; i < studients.size(); i++) {
 			if (studients.get(i).getEmail().equals(str)) {
 				userChanged = studients.get(i);
@@ -281,7 +281,7 @@ public class AdminMenu {
 		Personnel userChanged = null;
 		boolean found = false;
 
-		ArrayList<Student> studients = this.getDatabase().getStudients();
+		ArrayList<Student> studients = this.getDatabase().getStudents();
 		for (int i = 0; i < studients.size(); i++) {
 			if (studients.get(i).getEmail().equals(str)) {
 				userChanged = studients.get(i);
@@ -442,7 +442,7 @@ public class AdminMenu {
 
 		System.out.println();
 
-		ArrayList<Student> studients = this.getDatabase().getStudients();
+		ArrayList<Student> studients = this.getDatabase().getStudents();
 		System.out.println("Etudiants :");
 		length = studients.size();
 		if (length > 0) {

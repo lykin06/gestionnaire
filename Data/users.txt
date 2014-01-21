@@ -16,3 +16,5 @@ etudiant ; null ; null ; 1234 ; 12 ; 3
 administrateur ; test ; test ; test@test.com ; test ; 12
 
 etudiant ; Mathieu ; BOUTELIER ; lykin06@gmail.com ; passe ; 11
+
+enseignant ; professeur ; tournesol ; 4321 ; 21 ; 16

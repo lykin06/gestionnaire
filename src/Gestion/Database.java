@@ -17,14 +17,14 @@ import Serialization.Text;
  */
 public class Database {
     private ArrayList<Teacher> teachers;
-    private ArrayList<Student> studients;
+    private ArrayList<Student> students;
     private ArrayList<Administrator> administrators;
     private ArrayList<Unknown> unknown;
     private Personnel currentUser;
 
     public Database() {
         setTeachers(new ArrayList<Teacher>());
-        setStudients(new ArrayList<Student>());
+        setStudents(new ArrayList<Student>());
         setAdministrators(new ArrayList<Administrator>());
         setUnknown(new ArrayList<Unknown>());
         load();
@@ -61,7 +61,7 @@ public class Database {
                             email, password, identifiant));
                     break;
                 case "etudiant":
-                    studients.add(new Student(firstName, name, email,
+                    students.add(new Student(firstName, name, email,
                             password, identifiant));
                     break;
                 case "enseignant":
@@ -153,8 +153,8 @@ public class Database {
             }
         }
 
-        for (int i = 0; i < this.getStudients().size(); i++) {
-            this.setCurrentUser(this.getStudients().get(i));
+        for (int i = 0; i < this.getStudents().size(); i++) {
+            this.setCurrentUser(this.getStudents().get(i));
             if (getCurrentUser().getEmail().equals(email)
                     && getCurrentUser().getPassword().equals(password)) {
                 return true;
@@ -229,18 +229,18 @@ public class Database {
     }
 
     /**
-     * @return the studients
+     * @return the students
      */
-    public ArrayList<Student> getStudients() {
-        return studients;
+    public ArrayList<Student> getStudents() {
+        return students;
     }
 
     /**
-     * @param studients
-     *            the studients to set
+     * @param students
+     *            the students to set
      */
-    public void setStudients(ArrayList<Student> studients) {
-        this.studients = studients;
+    public void setStudents(ArrayList<Student> students) {
+        this.students = students;
     }
 
     /**

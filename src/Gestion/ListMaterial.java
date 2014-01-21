@@ -17,77 +17,96 @@ import Serialization.Data;
  * 
  */
 public class ListMaterial {
-	private ArrayList<Material> materials;
+    private ArrayList<Material> materials;
+    private int size;
 
-	public ListMaterial() {
-		this.load();
-	}
+    public ListMaterial() {
+        this.load();
+        size = materials.size();
+    }
 
-	/**
-	 * this method load the informations in the database and set them in the
-	 * arraylist.
-	 */
-	public void load() {
-		this.setMaterials((ArrayList<Material>) Data.load("material"));
-	}
+    /**
+     * this method load the informations in the database and set them in the
+     * arraylist.
+     */
+    public void load() {
+        materials = (ArrayList<Material>) Data.load("material");
+    }
 
-	public ArrayList<Material> forStudients() {
-		ArrayList<Material> res = new ArrayList<>();
-		for (int i = 0; i < this.getMaterials().size(); i++) {
-			if (!(this.getMaterials().get(i) instanceof Camera || this
-					.getMaterials().get(i) instanceof Phone)) {
-				res.add(this.getMaterials().get(i));
-			}
-		}
-		return res;
-	}
+    public/* ArrayList<Material> */String forStudents() {
+        /*
+         * ArrayList<Material> res = new ArrayList<>(); for (int i = 0; i <
+         * this.getMaterials().size(); i++) { if (!(this.getMaterials().get(i)
+         * instanceof Camera || this .getMaterials().get(i) instanceof Phone)) {
+         * res.add(this.getMaterials().get(i)); } } return res;
+         */
 
-	/**
-	 * This method reinitialize the list of material
-	 */
-	public void reinitialize() {
-		this.setMaterials(new ArrayList<Material>());
-		this.getMaterials().add(new Camera());
-		this.getMaterials().add(new Headphone());
-		this.getMaterials().add(new Laptop("GNU/Linux"));
-		this.getMaterials().add(new Laptop("Windows"));
-		this.getMaterials().add(new Laptop("MAC"));
-		this.getMaterials().add(new Phone("iOS"));
-		this.getMaterials().add(new Phone("Android"));
-		this.getMaterials().add(new Phone("Windows Phone"));
-		this.getMaterials().add(new Tablet("iOS"));
-		this.getMaterials().add(new Tablet("Android"));
-		this.getMaterials().add(new Tablet("Windows Phone"));
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < size; ++i) {
+            if (materials.get(i) instanceof Phone || materials.get(i) instanceof Camera) {
+                continue; // Skip this index
+            }
+            str.append(i + 1);
+            str.append(". ");
+            str.append(materials.get(i).toString());
+            str.append(" [");
+            str.append(materials.get(i).getQuantity());
+            str.append("]\n");
+        }
+        return str.toString();
+    }
 
-		Data.store(this.getMaterials(), "material");
-	}
+    /**
+     * This method reinitialize the list of material
+     */
+    public void reinitialize() {
+        materials = new ArrayList<Material>();
+        materials.add(new Camera());
+        materials.add(new Headphone());
+        materials.add(new Laptop("GNU/Linux"));
+        materials.add(new Laptop("Windows"));
+        materials.add(new Laptop("MAC"));
+        materials.add(new Phone("iOS"));
+        materials.add(new Phone("Android"));
+        materials.add(new Phone("Windows Phone"));
+        materials.add(new Tablet("iOS"));
+        materials.add(new Tablet("Android"));
+        materials.add(new Tablet("Windows Phone"));
 
-	@Override
-	public String toString() {
-		String str = "";
-		for (int i = 0; i < this.getMaterials().size(); i++) {
-			str += (i + 1) + ". " + this.getMaterials().get(i).toString()
-					+ " [" + this.getMaterials().get(i).getQuantity() + "]\n";
-		}
-		return str;
-	}
+        Data.store(materials, "material");
+    }
 
-	/**
-	 * @return the materials
-	 */
-	public ArrayList<Material> getMaterials() {
-		return materials;
-	}
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < size; ++i) {
+            str.append(i + 1);
+            str.append(". ");
+            str.append(materials.get(i).toString());
+            str.append(" [");
+            str.append(materials.get(i).getQuantity());
+            str.append("]\n");
+        }
+        return str.toString();
+    }
 
-	/**
-	 * @param materials
-	 *            the materials to set
-	 */
-	public void setMaterials(ArrayList<Material> materials) {
-		this.materials = materials;
-	}
+    /**
+     * @return the materials
+     */
+    public ArrayList<Material> getMaterials() {
+        return materials;
+    }
 
-	public void store() {
-		Data.store(this.getMaterials(), "reservations");
-	}
+    /**
+     * @param materials
+     *            the materials to set
+     */
+    public void setMaterials(ArrayList<Material> materials) {
+        this.materials = materials;
+    }
+
+    public void store() {
+        // Data.store(materials, "reservations");
+        Data.store(materials, "material");
+    }
 }

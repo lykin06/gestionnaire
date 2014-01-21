@@ -89,7 +89,7 @@ public class AdminMenu {
 		System.out.println("4. Supprimer un utilisateur.");
 		System.out.println("5. Afficher la liste des utilisateurs inscrits");
 
-		int value = this.getManager().requestInt(1, 4);
+		int value = this.getManager().requestInt(1, 5);
 
 		switch (value) {
 		case 1:
@@ -221,7 +221,7 @@ public class AdminMenu {
 					cpt++;
 				}
 			}
-			// TODO réparer les autorisations.
+			// TODO reparer les autorisations.
 			/*
 			 * System.out.println("Quel demande de reservation autoriser ?");
 			 * int indice = this.getManager().requestInt(1, cpt) - 1;

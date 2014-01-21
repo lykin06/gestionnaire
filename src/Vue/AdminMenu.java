@@ -341,7 +341,7 @@ public class AdminMenu {
 			break;
 		}
 
-		System.out.println("Utilisateur ajout�");
+		System.out.println("Utilisateur ajoute");
 	}
 
 	/**

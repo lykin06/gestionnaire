@@ -1,7 +1,12 @@
 package Vue;
 
+import Config.Config;
 import Gestion.Database;
 import Gestion.Manager;
+import Personnel.Administrator;
+import Personnel.Studient;
+import Personnel.Teacher;
+import Personnel.Unknown;
 
 /**
  * Login class
@@ -24,7 +29,8 @@ public class Login {
      * this method display on the screen Welcome to this application.
      */
     private void heading() {
-        System.out.println("Bienvenue dans ce gestionnaire. Voici vos options disponibles :");
+        System.out
+                .println("Bienvenue dans ce gestionnaire. Voici vos options disponibles :");
         System.out.println("1. Connexion.");
         System.out.println("2. Inscription");
         System.out.println("3. Quitter");
@@ -51,7 +57,7 @@ public class Login {
         System.out.println("Menu 2 pour vous inscrire.");
         return false;
     }
-    
+
     /**
      * Quit the application
      */
@@ -76,7 +82,7 @@ public class Login {
             }
             break;
         case 2:
-            //managementUser();
+            inscription();
             break;
         case 3:
             quit();
@@ -86,6 +92,37 @@ public class Login {
             goToMenu();
             break;
         }
+    }
+
+    private void inscription() {
+        int identifiant;
+        String firstName, name, email, password;
+        System.out.println("Qui etes-vous ?");
+        System.out.println("1. administrateur\n2. etudiant\n3. enseignant");
+        identifiant = manager.requestInt(1, 3);
+        System.out.println("Entrez votre prenom :");
+        firstName = manager.requestString();
+        System.out.println("Entrez votre nom :");
+        name = manager.requestString();
+        System.out.println("Entrez votre adresse mail :");
+        email = manager.requestString();
+        System.out.println("Entrez un mot de passe :");
+        password = manager.requestString();
+        
+        switch(identifiant) {
+        case 1:
+            bdd.addUser(new Unknown("administrateur", firstName, name, email, password, identifiant));
+            break;
+        case 2:
+            bdd.addUser(new Unknown("etudiant", firstName, name, email, password, identifiant));
+            break;
+        case 3:
+            bdd.addUser(new Unknown("enseignant", firstName, name, email, password, identifiant));
+            break;
+        }
+
+        System.out.println("Utilisateur ajoute");
+        goToMenu();
     }
 
     /**

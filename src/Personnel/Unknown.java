@@ -24,12 +24,6 @@ public class Unknown extends Personnel {
 
     @Override
     public String toString() {
-        StringBuilder str = new StringBuilder();
-        str.append(super.getFirstName());
-        str.append(" veut etre un ");
-        str.append(type);
-        str.append("\n");
-        
-        return str.toString();
+        return "inconnu";
     }
 }

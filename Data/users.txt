@@ -1,5 +1,5 @@
 /**
-*	[nature] ; [prénom] ; [nom] ; [email] ; [mot de passe] ; [identifiant]
+*	[nature] ; [prï¿½nom] ; [nom] ; [email] ; [mot de passe] ; [identifiant]
 **/
 administrateur ; root ; root ; root@root.com ; root ; 1 
 etudiant ; Amir ; Ben Slimane ; benslima@unice.fr ; amir ; 2
@@ -11,3 +11,8 @@ administrateur ; ARE ;   ;   ;   ; 7
 administrateur ;   ;   ;   ;   ; 7
 etudiant ; Amir ; Ben slimane ; maeaz ; zae ; 12
 etudiant ; null ; null ; 1234 ; 12 ; 3
+
+
+administrateur ; test ; test ; test@test.com ; test ; 12
+
+etudiant ; Mathieu ; BOUTELIER ; lykin06@gmail.com ; passe ; 11

@@ -27,7 +27,7 @@ public class BorrowerMenu {
 	public BorrowerMenu(Database database) {
 		this.database = database;
 		this.setManager(new Manager());
-		this.setListMaterial(new ListMaterial());
+		this.listMaterial=new ListMaterial();
 		this.listReservations = new ListReservations();
 		if (this.getListMaterial().getMaterials() == null) {
 			this.getListMaterial().reinitialize();

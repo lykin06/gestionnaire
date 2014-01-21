@@ -191,19 +191,19 @@ public class AdminMenu {
 	 */
 	private void addMaterial() {
 		ArrayList<Material> materials = this.getListMaterial().getMaterials();
-		System.out
-				.println("Quel est le materiel que vous souhaitez ajouter au stock ?");
-		this.getListMaterial().toString();
-
+		
+		//this.listMaterial.toString();
+		this.displayMaterials();
+		System.out.println("Quel est le materiel que vous souhaitez ajouter au stock ?");
 		int indice = this.getManager().requestInt(1, materials.size()) - 1;
 
 		System.out.println("Combien ? Il en reste "
 				+ materials.get(indice).getQuantity() + ".");
 		int n = manager.requestInt(0, materials.get(indice).getQuantity());
-		materials.get(indice).setQuantity(
-				materials.get(indice).getQuantity() + n);
-
-		this.getListMaterial().store();
+		materials.get(indice).setQuantity(materials.get(indice).getQuantity() + n);
+		
+		this.listMaterial.setMaterials(materials);
+		this.listMaterial.store();
 	}
 
 	private void managementLoan() {

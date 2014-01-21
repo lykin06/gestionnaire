@@ -69,9 +69,7 @@ public class BorrowerMenu {
 
     private void giveBack() {
         System.out.println("Voici la liste du materiel reserves :");
-        ArrayList<Reservation> res = this.getListReservations()
-                .getReservationsOf(
-                        (Borrower) this.getDatabase().getCurrentUser());
+        ArrayList<Reservation> res = this.listReservations.getReservationsOf((Borrower) this.database.getCurrentUser());
         if (res.size() == 0) {
             System.out.println("Aucun materiel emprunte.");
         } else {
@@ -81,12 +79,10 @@ public class BorrowerMenu {
             System.out.println("Quel materiel rendre ?");
             int indice = this.getManager().requestInt(1, res.size()) - 1;
             Reservation reservationDelete = res.get(indice);
-            res.get(indice)
-                    .getMaterial()
-                    .setQuantity(
-                            res.get(indice).getMaterial().getQuantity() + 1);
+            res.get(indice).getMaterial().setQuantity(res.get(indice).getMaterial().getQuantity() + 1);
             res.remove(indice);
-            this.getListReservations().remove(reservationDelete);
+            this.listReservations.remove(reservationDelete);
+            
         }
     }
 

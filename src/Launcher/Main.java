@@ -5,7 +5,7 @@ import Vue.Login;
 /**
  * Main class start management
  * 
- * @author Amir BEN SLIMANE
+ * @author Aurelien Colombet
  */
 public class Main {
 	public static void main(String[] args) {

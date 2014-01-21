@@ -120,7 +120,7 @@ public class AdminMenu {
 		System.out.println("1. Ajouter un materiel.");
 		System.out.println("2. Supprimer un materiel.");
 		System.out.println("3. Afficher la liste des materiels");
-		System.out.println("4. Reinitialiser le stock de materiel");
+		System.out.println("4. Reinitialiser le stock de materiel (!Attention cela va Reinitialiser les reservations)");
 
 		int value = this.getManager().requestInt(1, 4);
 
@@ -136,6 +136,7 @@ public class AdminMenu {
 			break;
 		case 4:
 			this.getListMaterial().reinitialize();
+			this.listReservations.reinitialize();
 		default:
 			break;
 		}

@@ -40,6 +40,7 @@ public class ListReservations {
 				break;
 			}
 		}
+		Data.store(this.getReservations(), "reservation");
 	}
 
 	/**

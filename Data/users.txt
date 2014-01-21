@@ -1,0 +1,13 @@
+/**
+*	[nature] ; [prénom] ; [nom] ; [email] ; [mot de passe] ; [identifiant]
+**/
+administrateur ; root ; root ; root@root.com ; root ; 1 
+etudiant ; Amir ; Ben Slimane ; benslima@unice.fr ; amir ; 2
+etudiant ; Aurelien ; Colombet ; colombet@polytech.unice.fr ; aurelien ; 3
+enseignant ; Anne-Marie ; Pinna-Dery ; pinna@polytech.unice.fr ; anne ; 4
+enseignant ; Peter ; Sander ; sander@unice.fr ; peter ; 5
+enseignant ; Igor ; Litovsky ; lito@polytech.unice.fr ; igor ; 6
+administrateur ; ARE ;   ;   ;   ; 7
+administrateur ;   ;   ;   ;   ; 7
+etudiant ; Amir ; Ben slimane ; maeaz ; zae ; 12
+etudiant ; null ; null ; 1234 ; 12 ; 3

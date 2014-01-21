@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import Material.Material;
 import Personnel.Borrower;
-import Personnel.Studient;
+import Personnel.Student;
 
 public class ListReservationsTest {
 	ListReservations listReservations;
@@ -26,7 +26,7 @@ public class ListReservationsTest {
 
 	@Test
 	public void addTest() {
-		Borrower borrower = new Studient(" ", " ", " ", " ", 0);
+		Borrower borrower = new Student(" ", " ", " ", " ", 0);
 		Date date = new Date();
 		Material material = new Material("Laptop");
 		Reservation reservation = new Reservation(borrower, material, date);

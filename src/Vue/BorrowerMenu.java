@@ -11,7 +11,7 @@ import Gestion.Manager;
 import Gestion.Reservation;
 import Material.Material;
 import Personnel.Borrower;
-import Personnel.Studient;
+import Personnel.Student;
 
 /**
  * BorrowerMenu class
@@ -94,7 +94,7 @@ public class BorrowerMenu {
 	private void borrow() {
 		System.out.println("Que voulez vous emprunter ?");
 		ListMaterial list;
-		if (this.getDatabase().getCurrentUser() instanceof Studient) {
+		if (this.getDatabase().getCurrentUser() instanceof Student) {
 			list = new ListMaterial();
 			list.setMaterials(this.getListMaterial().forStudients());
 		} else {

@@ -11,7 +11,7 @@ import Gestion.Reservation;
 import Material.Material;
 import Personnel.Administrator;
 import Personnel.Personnel;
-import Personnel.Studient;
+import Personnel.Student;
 import Personnel.Teacher;
 import Personnel.Unknown;
 
@@ -239,7 +239,7 @@ public class AdminMenu {
 		Personnel userChanged = null;
 		boolean found = false;
 
-		ArrayList<Studient> studients = this.getDatabase().getStudients();
+		ArrayList<Student> studients = this.getDatabase().getStudients();
 		for (int i = 0; i < studients.size(); i++) {
 			if (studients.get(i).getEmail().equals(str)) {
 				userChanged = studients.get(i);
@@ -281,7 +281,7 @@ public class AdminMenu {
 		Personnel userChanged = null;
 		boolean found = false;
 
-		ArrayList<Studient> studients = this.getDatabase().getStudients();
+		ArrayList<Student> studients = this.getDatabase().getStudients();
 		for (int i = 0; i < studients.size(); i++) {
 			if (studients.get(i).getEmail().equals(str)) {
 				userChanged = studients.get(i);
@@ -345,12 +345,12 @@ public class AdminMenu {
 			return;
 		case 2:
 			this.getDatabase().addUser(
-					new Studient(user.getFirstName(), user.getName(), user
+					new Student(user.getFirstName(), user.getName(), user
 							.getEmail(), user.getPassword(), identifiant));
 			return;
 		case 3:
 			this.getDatabase().addUser(
-					new Studient(user.getFirstName(), user.getName(), user
+					new Student(user.getFirstName(), user.getName(), user
 							.getEmail(), user.getPassword(), identifiant));
 			return;
 		}
@@ -392,7 +392,7 @@ public class AdminMenu {
 		case 3:
 			this.getDatabase()
 					.addUser(
-							new Studient(firstName, name, email, password,
+							new Student(firstName, name, email, password,
 									identifiant));
 			break;
 		}
@@ -442,7 +442,7 @@ public class AdminMenu {
 
 		System.out.println();
 
-		ArrayList<Studient> studients = this.getDatabase().getStudients();
+		ArrayList<Student> studients = this.getDatabase().getStudients();
 		System.out.println("Etudiants :");
 		length = studients.size();
 		if (length > 0) {

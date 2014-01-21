@@ -4,7 +4,7 @@ import Config.Config;
 import Gestion.Database;
 import Gestion.Manager;
 import Personnel.Administrator;
-import Personnel.Studient;
+import Personnel.Student;
 import Personnel.Teacher;
 import Personnel.Unknown;
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import Personnel.Administrator;
 import Personnel.Personnel;
-import Personnel.Studient;
+import Personnel.Student;
 import Personnel.Teacher;
 import Personnel.Unknown;
 import Serialization.Text;
@@ -17,14 +17,14 @@ import Serialization.Text;
  */
 public class Database {
     private ArrayList<Teacher> teachers;
-    private ArrayList<Studient> studients;
+    private ArrayList<Student> studients;
     private ArrayList<Administrator> administrators;
     private ArrayList<Unknown> unknown;
     private Personnel currentUser;
 
     public Database() {
         setTeachers(new ArrayList<Teacher>());
-        setStudients(new ArrayList<Studient>());
+        setStudients(new ArrayList<Student>());
         setAdministrators(new ArrayList<Administrator>());
         setUnknown(new ArrayList<Unknown>());
         load();
@@ -61,7 +61,7 @@ public class Database {
                             email, password, identifiant));
                     break;
                 case "etudiant":
-                    studients.add(new Studient(firstName, name, email,
+                    studients.add(new Student(firstName, name, email,
                             password, identifiant));
                     break;
                 case "enseignant":
@@ -231,7 +231,7 @@ public class Database {
     /**
      * @return the studients
      */
-    public ArrayList<Studient> getStudients() {
+    public ArrayList<Student> getStudients() {
         return studients;
     }
 
@@ -239,7 +239,7 @@ public class Database {
      * @param studients
      *            the studients to set
      */
-    public void setStudients(ArrayList<Studient> studients) {
+    public void setStudients(ArrayList<Student> studients) {
         this.studients = studients;
     }
 

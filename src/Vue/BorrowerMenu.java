@@ -25,14 +25,14 @@ public class BorrowerMenu {
 	private ListMaterial listMaterial;
 
 	public BorrowerMenu(Database database) {
-		this.setDatabase(database);
+		this.database = database;
 		this.setManager(new Manager());
 		this.setListMaterial(new ListMaterial());
-		this.setListReservations(new ListReservations());
+		this.listReservations = new ListReservations();
 		if (this.getListMaterial().getMaterials() == null) {
 			this.getListMaterial().reinitialize();
 		}
-		if (this.getListReservations().getReservations() == null) {
+		if (this.listReservations.getReservations() == null) {
 			this.getListReservations().reinitialize();
 		}
 		this.studientMenu();
@@ -118,11 +118,8 @@ public class BorrowerMenu {
 			date.setYear(Integer.parseInt(str[2]));
 		}
 
-		this.getListReservations()
-				.getReservations()
-				.add(new Reservation((Borrower) this.getDatabase()
-						.getCurrentUser(), list.getMaterials().get(indice),
-						date));
+		this.listReservations.add(new Reservation((Borrower) this.getDatabase()
+				.getCurrentUser(), list.getMaterials().get(indice), date));
 		list.getMaterials()
 				.get(indice)
 				.setQuantity(

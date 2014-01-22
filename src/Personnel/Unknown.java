@@ -10,6 +10,7 @@ package Personnel;
  * @author Mathieu BOUTELIER
  * 
  */
+@SuppressWarnings("serial")
 public class Unknown extends Personnel {
     /**
      * user's type (can be Administrator, Student or Teacher)

@@ -3,7 +3,7 @@ package Gestion;
 import java.util.Scanner;
 
 /**
- * Class Manager
+ * Class Manager TODO commenter cette classe
  * 
  * @author Aurelien COLOMBET
  * 

@@ -12,7 +12,7 @@ import Serialization.Data;
 
 /**
  * Class ListMaterial
- * 
+ * TODO commenter cette section
  * @author Aurelien COLOMBET
  * 
  */
@@ -30,16 +30,14 @@ public class ListMaterial {
      * arraylist.
      */
     public void load() {
+        // TODO peut on enlever ce warning
         materials = (ArrayList<Material>) Data.load("material");
     }
 
-    public/* ArrayList<Material> */String forStudents() {
-        /*
-         * ArrayList<Material> res = new ArrayList<>(); for (int i = 0; i <
-         * this.getMaterials().size(); i++) { if (!(this.getMaterials().get(i)
-         * instanceof Camera || this .getMaterials().get(i) instanceof Phone)) {
-         * res.add(this.getMaterials().get(i)); } } return res;
-         */
+    /**
+     * @return the list of available materials for Students
+     */
+    public String forStudents() {
 
         StringBuilder str = new StringBuilder();
         for (int i = 0; i < size; ++i) {

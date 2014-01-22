@@ -137,6 +137,8 @@ public class Database {
      * @return true if the user is authorized
      */
     public boolean isAuthorized(String email, String password) {
+        // TODO reduire la taille de la methode
+        
         for (int i = 0; i < this.getAdministrators().size(); i++) {
             this.setCurrentUser(this.getAdministrators().get(i));
             if (this.getCurrentUser().getEmail().equals(email)

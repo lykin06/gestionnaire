@@ -93,18 +93,11 @@ public class BorrowerMenu {
     private void borrow() {
         System.out.println("Que voulez vous emprunter ?");
         Personnel user = database.getCurrentUser();
-
-        /*
-         * ListMaterial list; if (user instanceof Student) { list = new
-         * ListMaterial();
-         * list.setMaterials(this.getListMaterial().forStudents()); } else {
-         * list = this.getListMaterial(); } System.out.println(list.toString());
-         */
         
         if (user instanceof Student) {
-            System.out.println(listMaterial.forStudents());
+            System.out.println(listMaterial.avaibleMaterials(true));
         } else {
-            System.out.println(listMaterial.toString());
+            System.out.println(listMaterial.avaibleMaterials(false));
         }
 
         int indice = manager.requestInt(1, listMaterial.getMaterials().size()) - 1;
@@ -117,12 +110,6 @@ public class BorrowerMenu {
             int jours = manager.requestInt(1, 100);
             date = new Date(date.getYear(), date.getMonth(), date.getDate()
                     + jours);
-            /*
-             * String[] str = this.getManager().requestString().split("/"); date
-             * = new Date(); date.setDate(Integer.parseInt(str[0]));
-             * date.setMonth(Integer.parseInt(str[1]));
-             * date.setYear(Integer.parseInt(str[2]));
-             */
         }
 
         listReservations.add(new Reservation((Borrower) user, listMaterial

@@ -25,13 +25,6 @@ public class Material implements Serializable {
         return dureeEmprunt;
     }
 
-    public int dureeMax(boolean isStudent) {
-        if (isStudent) {
-            return (dureeEmprunt / 2);
-        }
-        return dureeEmprunt;
-    }
-
     public void setDureeEmprunt(int dureeEmprunt) {
         this.dureeEmprunt = dureeEmprunt;
     }

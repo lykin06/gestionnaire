@@ -131,7 +131,7 @@ public class BorrowerMenu {
         }
 
         // Rendering date
-        int maxFinish = material.dureeMax(user instanceof Student);
+        int maxFinish = this.dureeMax(user instanceof Student, material);
         System.out
                 .println("Pendant combien de jours voulez-vous garder l'objet (min 0, max "
                         + maxFinish + "):");
@@ -147,6 +147,15 @@ public class BorrowerMenu {
                 .setQuantity(
                         listMaterial.getMaterials().get(indice).getQuantity() - 1);
         listMaterial.store();
+    }
+    
+    public int dureeMax(boolean isStudent, Material material) {
+        int dureeEmprunt = material.getDureeEmprunt();
+        
+        if (isStudent) {
+            return (dureeEmprunt / 2);
+        }
+        return dureeEmprunt;
     }
 
     private void displaysReservations() {

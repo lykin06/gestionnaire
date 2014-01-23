@@ -18,7 +18,10 @@ import Personnel.Teacher;
 import Personnel.Unknown;
 
 /**
- * AdminMenu class
+ * <b>AdminMenu class<b>
+ * <p>
+ * This class operates all the options available to an administrator.
+ * </p>
  * 
  * @author Aurelien COLOMBET
  */
@@ -74,7 +77,7 @@ public class AdminMenu {
             break;
         case 5:
             new Login();
-            break; 
+            break;
         default:
             break;
         }
@@ -112,9 +115,6 @@ public class AdminMenu {
         case 5:
             this.displayUsers();
             break;
-        case 6:
-            this.adminMenu();
-            break;
         default:
             break;
         }
@@ -133,8 +133,9 @@ public class AdminMenu {
         System.out.println("3. Afficher la liste des materiels");
         System.out
                 .println("4. Reinitialiser le stock de materiel (!Attention cela va Reinitialiser les reservations)");
+        System.out.println("5. Annuler");
 
-        int value = this.manager.requestInt(1, 4);
+        int value = this.manager.requestInt(1, 5);
 
         switch (value) {
         case 1:
@@ -149,6 +150,7 @@ public class AdminMenu {
         case 4:
             this.listMaterial.reinitialize();
             this.listReservations.reinitialize();
+            break;
         default:
             break;
         }

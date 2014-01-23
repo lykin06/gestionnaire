@@ -164,12 +164,25 @@ public class AdminMenu {
      */
     private void displayMaterials() {
         ArrayList<Material> materials = this.listMaterial.getMaterials();
+        
         System.out.println("Le stock contient :");
         for (int i = 0; i < materials.size(); i++) {
             System.out.println(materials.get(i).toString() + " ["
                     + materials.get(i).getQuantity() + "]");
         }
-        System.out.println();
+        System.out.println("Liste des reservations acceptes :\n");
+        this.displayReservationsAccepted();
+        
+    }
+    
+    private void displayReservationsAccepted() {
+    	ArrayList<Reservation> res = this.listReservations.getReservations();
+    	for (int i = 0; i < res.size(); i++) {
+            if (res.get(i).isAccepted()) {
+                System.out.println((i) + " - " + res.get(i).toString());
+            }
+        }
+    	System.out.println();
     }
 
     /**
@@ -204,7 +217,6 @@ public class AdminMenu {
     private void addMaterial() {
         ArrayList<Material> materials = this.listMaterial.getMaterials();
 
-        // this.listMaterial.toString();
         this.displayMaterials();
         System.out
                 .println("Quel est le materiel que vous souhaitez ajouter au stock ?");
@@ -228,9 +240,7 @@ public class AdminMenu {
             int cpt = 0;
             for (int i = 0; i < res.size(); i++) {
                 if (!res.get(i).isAccepted()) {
-                    System.out.println((/*cpt + 1*/i) + res.get(i).toString());
-                    // this.listReservations.add(res.get(i));
-                    // this.listReservations.reinitialize();
+                    System.out.println((i) + res.get(i).toString());
                     cpt++;
                 }
             }
@@ -499,7 +509,6 @@ public class AdminMenu {
     private void statistiques() {
         System.out.println("1: le materiel le plus emprunte");
         System.out.println("2: le plus gros emprunteurs ");
-        // System.out.println("3:l' emprunteur qui ne respecte pas les delais");
         int rep = this.manager.requestInt(1, 2);
         switch (rep) {
         case 1:

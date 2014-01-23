@@ -10,30 +10,63 @@ import Personnel.Unknown;
 import Serialization.Text;
 
 /**
- * Generate user's list
+ * <b>Generate list for all user types </b>
  * 
  * @author Aurelien COLOMBET
  * 
  */
 public class Database {
-    private ArrayList<Teacher> teachers;
-    private ArrayList<Student> students;
-    private ArrayList<Administrator> administrators;
+    /**
+     * List of users who are teacher
+     */
+    private ArrayList<Personnel> teachers;
+
+    /**
+     * List of users who are student
+     */
+    private ArrayList<Personnel> students;
+
+    /**
+     * List of users who are administrator
+     */
+    private ArrayList<Personnel> administrators;
+
+    /**
+     * List of user who are not confirmed by an administrator
+     */
     private ArrayList<Unknown> unknown;
+
+    /**
+     * The current user
+     */
     private Personnel currentUser;
 
+    /**
+     * <b>Constructor</b>
+     * <p>
+     * Generate all the list with the load method.
+     * </p>
+     * 
+     * @see Database#load();
+     */
     public Database() {
-        setTeachers(new ArrayList<Teacher>());
-        setStudents(new ArrayList<Student>());
-        setAdministrators(new ArrayList<Administrator>());
-        setUnknown(new ArrayList<Unknown>());
-        load();
+        this.administrators = new ArrayList<Personnel>();
+        this.students = new ArrayList<Personnel>();
+        this.teachers = new ArrayList<Personnel>();
+        this.unknown = new ArrayList<Unknown>();
+        this.load();
     }
 
     /**
-     * Load the users from the file to their list
+     * <b>Load the users</b>
+     * <p>
+     * All the users are store in a text file.
+     * </p>
+     * 
+     * @see Text#load(String)
      */
     public void load() {
+        // Load the file
         String[] bdd = Text.load("users");
 
         String[] line;
@@ -61,8 +94,8 @@ public class Database {
                             email, password, identifiant));
                     break;
                 case "etudiant":
-                    students.add(new Student(firstName, name, email,
-                            password, identifiant));
+                    students.add(new Student(firstName, name, email, password,
+                            identifiant));
                     break;
                 case "enseignant":
                     teachers.add(new Teacher(firstName, name, email, password,
@@ -70,13 +103,13 @@ public class Database {
                     break;
                 case "inconnu":
                     try {
-                        unknown.add(addUnknown(firstName, name, email,
+                        unknown.add(this.addUnknown(firstName, name, email,
                                 password, identifiant));
                     } catch (Exception e) {
                         // This should not happened
                         System.out
                                 .println("identifiant invalide, utilisateur supprime");
-                        removeUser(new Personnel(firstName, name, email,
+                        this.removeUser(new Personnel(firstName, name, email,
                                 password, identifiant));
                     }
                     break;
@@ -137,33 +170,43 @@ public class Database {
      * @return true if the user is authorized
      */
     public boolean isAuthorized(String email, String password) {
-        // TODO reduire la taille de la methode
-        
-        for (int i = 0; i < this.getAdministrators().size(); i++) {
-            this.setCurrentUser(this.getAdministrators().get(i));
-            if (this.getCurrentUser().getEmail().equals(email)
-                    && this.getCurrentUser().getPassword().equals(password)) {
-                return true;
-            }
+
+        if (this.searchList(administrators, email, password)) {
+            return true;
         }
 
-        for (int i = 0; i < this.getTeachers().size(); i++) {
-            this.setCurrentUser(this.getTeachers().get(i));
-            if (getCurrentUser().getEmail().equals(email)
-                    && getCurrentUser().getPassword().equals(password)) {
-                return true;
-            }
+        if (this.searchList(students, email, password)) {
+            return true;
         }
 
-        for (int i = 0; i < this.getStudents().size(); i++) {
-            this.setCurrentUser(this.getStudents().get(i));
-            if (getCurrentUser().getEmail().equals(email)
-                    && getCurrentUser().getPassword().equals(password)) {
-                return true;
-            }
+        if (this.searchList(teachers, email, password)) {
+            return true;
         }
 
         // An unknown user is not authorized
+        return false;
+    }
+
+    /**
+     * <b>Search if the user exists in the list</b>
+     * 
+     * @param list
+     *            the list to search
+     * @param email
+     *            the user's email
+     * @param password
+     *            the user's password
+     * @return true if the user is in the list
+     */
+    public boolean searchList(ArrayList<Personnel> list, String email,
+            String password) {
+        for (int i = 0; i < list.size(); i++) {
+            this.setCurrentUser(list.get(i));
+            if (currentUser.getEmail().equals(email)
+                    && currentUser.getPassword().equals(password)) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -195,12 +238,15 @@ public class Database {
      * 
      * @param user
      *            the user to remove
+     * 
+     * @see Text#deleteLine(String, int)
      */
     public void removeUser(Personnel user) {
         String[] bdd = Text.load("users");
         int line = -1;
 
-        for (int i = 0; i < bdd.length; i++) {
+        // We search the line to delete
+        for (int i = 0; i < bdd.length; ++i) {
             if (bdd[i].contains(user.getEmail())) {
                 line = i;
                 break;
@@ -208,6 +254,7 @@ public class Database {
         }
 
         try {
+            // Delete the line
             Text.deleteLine("users", line);
         } catch (Exception e) {
         }
@@ -216,52 +263,52 @@ public class Database {
     }
 
     /**
-     * @return the teachers
+     * @return the teachers list
      */
-    public ArrayList<Teacher> getTeachers() {
+    public ArrayList<Personnel> getTeachers() {
         return teachers;
     }
 
     /**
      * @param teachers
-     *            the teachers to set
+     *            the teachers list to set
      */
-    public void setTeachers(ArrayList<Teacher> teachers) {
+    public void setTeachers(ArrayList<Personnel> teachers) {
         this.teachers = teachers;
     }
 
     /**
-     * @return the students
+     * @return the students list
      */
-    public ArrayList<Student> getStudents() {
+    public ArrayList<Personnel> getStudents() {
         return students;
     }
 
     /**
      * @param students
-     *            the students to set
+     *            the students list to set
      */
-    public void setStudents(ArrayList<Student> students) {
+    public void setStudents(ArrayList<Personnel> students) {
         this.students = students;
     }
 
     /**
-     * @return the administrators
+     * @return the administrators list
      */
-    public ArrayList<Administrator> getAdministrators() {
+    public ArrayList<Personnel> getAdministrators() {
         return administrators;
     }
 
     /**
      * @param administrators
-     *            the administrators to set
+     *            the administrators list to set
      */
-    public void setAdministrators(ArrayList<Administrator> administrators) {
+    public void setAdministrators(ArrayList<Personnel> administrators) {
         this.administrators = administrators;
     }
 
     /**
-     * @return the unknown
+     * @return the unknown list
      */
     public ArrayList<Unknown> getUnknown() {
         return unknown;
@@ -269,7 +316,7 @@ public class Database {
 
     /**
      * @param unknown
-     *            the unknown to set
+     *            the unknown list to set
      */
     public void setUnknown(ArrayList<Unknown> unknown) {
         this.unknown = unknown;

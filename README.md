@@ -26,7 +26,7 @@ DONE
 ====
 -   Les etudients ne peuvent pas faire de réservation plus d'une semaine à l'avance. (Mathieu)
 -   gerer : Les étudiant peuvent emprunter le matériel sur une période courte (divisée par 2). (Mathieu)
-  
+-	Les emprunts sont acceptable par le gestionnaire.
 
 
 Man GitHub

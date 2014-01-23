@@ -228,19 +228,19 @@ public class AdminMenu {
             int cpt = 0;
             for (int i = 0; i < res.size(); i++) {
                 if (!res.get(i).isAccepted()) {
-                    System.out.println((cpt + 1) + res.get(i).toString());
+                    System.out.println((/*cpt + 1*/i) + res.get(i).toString());
                     // this.listReservations.add(res.get(i));
                     // this.listReservations.reinitialize();
                     cpt++;
                 }
             }
             // TODO reparer les autorisations.
-            /*
-             * System.out.println("Quel demande de reservation autoriser ?");
-             * int indice = this.getManager().requestInt(1, cpt) - 1;
-             * this.getListReservations().authorize(
-             * this.getListReservations().getReservations().get(indice));
-             */
+
+            System.out.println("Quel demande de reservation autoriser ?");
+            int indice = this.manager.requestInt(0, res.size()-1);//TODO peux etre mieux gerer le requestInt...
+            this.listReservations.authorize(this.listReservations.getReservations().get(indice));
+            this.listReservations.store();
+            
         }
     }
 

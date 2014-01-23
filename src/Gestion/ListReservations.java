@@ -114,5 +114,10 @@ public class ListReservations {
         this.reservations = new ArrayList<Reservation>();
         Data.store(this.reservations, "reservation");
     }
+    
+    public void store() {
+        // Data.store(materials, "reservations");
+        Data.store(this.reservations, "reservation");
+    }
 
 }

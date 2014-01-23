@@ -1,20 +1,23 @@
 package Vue;
 
-import Config.Config;
 import Gestion.Database;
 import Gestion.Manager;
-import Personnel.Administrator;
-import Personnel.Student;
-import Personnel.Teacher;
 import Personnel.Unknown;
 
 /**
- * Login class
+ * <b>Login class<b>
+ * <p>
+ * This class can launch new sessions with the login method or add new users
+ * with the inscription method.
+ * </p>
  * 
  * @author Aurelien COLOMBET
  */
 public class Login {
-    private Database bdd;
+    /**
+     * The database
+     */
+    private Database database;
     private Manager manager;
 
     public Login() {
@@ -49,7 +52,7 @@ public class Login {
         System.out.println("Entrez votre mot de passe :");
         password = getManager().requestString();
 
-        if (bdd.isAuthorized(email, password)) {
+        if (database.isAuthorized(email, password)) {
             return true;
         }
 
@@ -108,16 +111,19 @@ public class Login {
         email = manager.requestString();
         System.out.println("Entrez un mot de passe :");
         password = manager.requestString();
-        
-        switch(identifiant) {
+
+        switch (identifiant) {
         case 1:
-            bdd.addUser(new Unknown("administrateur", firstName, name, email, password, identifiant));
+            database.addUser(new Unknown("administrateur", firstName, name, email,
+                    password, identifiant));
             break;
         case 2:
-            bdd.addUser(new Unknown("etudiant", firstName, name, email, password, identifiant));
+            database.addUser(new Unknown("etudiant", firstName, name, email,
+                    password, identifiant));
             break;
         case 3:
-            bdd.addUser(new Unknown("enseignant", firstName, name, email, password, identifiant));
+            database.addUser(new Unknown("enseignant", firstName, name, email,
+                    password, identifiant));
             break;
         }
 
@@ -129,7 +135,7 @@ public class Login {
      * @return the bdd
      */
     public Database getBdd() {
-        return bdd;
+        return database;
     }
 
     /**
@@ -137,7 +143,7 @@ public class Login {
      *            the bdd to set
      */
     public void setBdd(Database bdd) {
-        this.bdd = bdd;
+        this.database = bdd;
     }
 
     /**

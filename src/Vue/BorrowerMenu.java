@@ -23,6 +23,7 @@ public class BorrowerMenu {
     private Manager manager;
     private ListReservations listReservations;
     private ListMaterial listMaterial;
+    private Date today;
 
     public BorrowerMenu(Database database) {
         this.database = database;
@@ -35,6 +36,7 @@ public class BorrowerMenu {
         if (this.listReservations.getReservations() == null) {
             this.listReservations.reinitialize();
         }
+        this.today = new Date();
         this.studentMenu();
     }
 
@@ -56,6 +58,7 @@ public class BorrowerMenu {
             this.borrow();
             break;
         case 3:
+            this.displaysReservations();
             this.giveBack();
             break;
         case 4:
@@ -68,27 +71,30 @@ public class BorrowerMenu {
         studentMenu();
     }
 
+    /**
+     * <b>To give back a material</b>
+     */
     private void giveBack() {
-        System.out.println("Voici la liste de vos reservations :");
-        ArrayList<Reservation> res = this.listReservations
+        ArrayList<Reservation> reservations = this.listReservations
                 .getReservationsOf((Borrower) this.database.getCurrentUser());
-        if (res.size() == 0) {
+
+        if (!reservations.isEmpty()) {
             System.out
-                    .println("Vous n'avez pas emprunte de materiel (menu 2 pour emprunter).");
-        } else {
-            for (int i = 0; i < res.size(); i++) {
-                System.out.println((i + 1) + ". " + res.get(i).toString());
+                    .println("Quel materiel voulez-vous rendre ? (pour annuler: "
+                            + (reservations.size() + 1) + ")");
+            int indice = this.manager.requestInt(1, reservations.size() + 1) - 1;
+            if (indice == reservations.size()) {
+                return;
             }
-            System.out.println("Quel materiel voulez-vous rendre ?");
-            int indice = this.manager.requestInt(1, res.size()) - 1;
-            Reservation reservationDelete = res.get(indice);
-            res.get(indice)
+            Reservation reservationDelete = reservations.get(indice);
+            reservations
+                    .get(indice)
                     .getMaterial()
                     .setQuantity(
-                            res.get(indice).getMaterial().getQuantity() + 1);
-            res.remove(indice);
+                            reservations.get(indice).getMaterial()
+                                    .getQuantity() + 1);
+            reservations.remove(indice);
             this.listReservations.remove(reservationDelete);
-
         }
     }
 
@@ -113,7 +119,7 @@ public class BorrowerMenu {
         }
 
         // Date selection
-        Date start = new Date();
+        Date start = today;
         System.out.println("1. Des aujourd'hui.\n2. Faire une reservation");
         int value = this.getManager().requestInt(1, 2);
         int maxStart = 1;
@@ -126,7 +132,7 @@ public class BorrowerMenu {
             System.out.println("Dans combien de jours voulez-vous l'objet ("
                     + maxStart + " jours max):");
             int jours = manager.requestInt(1, maxStart);
-            start = new Date(start.getYear(), start.getMonth(), start.getDate()
+            start = new Date(today.getYear(), today.getMonth(), today.getDate()
                     + jours);
         }
 
@@ -136,8 +142,8 @@ public class BorrowerMenu {
                 .println("Pendant combien de jours voulez-vous garder l'objet (min 0, max "
                         + maxFinish + "):");
         int jours = manager.requestInt(0, maxFinish);
-        Date finish = new Date(start.getYear(), start.getMonth(), start.getDate()
-                + jours);
+        Date finish = new Date(start.getYear(), start.getMonth(),
+                start.getDate() + jours);
 
         listReservations.add(new Reservation((Borrower) user, material, start,
                 finish));
@@ -148,26 +154,47 @@ public class BorrowerMenu {
                         listMaterial.getMaterials().get(indice).getQuantity() - 1);
         listMaterial.store();
     }
-    
+
+    /**
+     * <b>Compute the maximum length of a reservation</b>
+     * <p>
+     * The maximum length of reservation is divided by 2 if the user is a
+     * student.
+     * </p>
+     * 
+     * @param isStudent
+     *            if the user is a student
+     * @param material
+     *            the material wanted by the user
+     * @return the maximum length of reservation
+     */
     public int dureeMax(boolean isStudent, Material material) {
         int dureeEmprunt = material.getDureeEmprunt();
-        
+
         if (isStudent) {
             return (dureeEmprunt / 2);
         }
         return dureeEmprunt;
     }
 
+    /**
+     * <b>Display user's reservation list</b>
+     */
     private void displaysReservations() {
-        ArrayList<Reservation> res = this.getListReservations()
+        ArrayList<Reservation> reservations = this.getListReservations()
                 .getReservationsOf(
                         (Borrower) this.getDatabase().getCurrentUser());
-        if (res.isEmpty()) {
-            System.out.println("Vous n'avez fait aucun emprunt en cours.");
+        if (reservations.isEmpty()) {
+            System.out
+                    .println("Vous n'avez pas emprunte de materiel (menu 2 pour emprunter).");
         } else {
-            System.out.println("Voici la liste du materiel reserves :");
-            for (int i = 0; i < res.size(); i++) {
-                System.out.println(res.get(i).toString());
+            System.out.println("Voici la liste du vos reservations :");
+            for (int i = 0; i < reservations.size(); i++) {
+                System.out.println((i + 1) + ". "
+                        + reservations.get(i).toString());
+                if (reservations.get(i).getFinish().before(today)) {
+                    System.out.println("    Vous devez rendre cette emprunt.");
+                }
             }
         }
     }

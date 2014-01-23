@@ -73,7 +73,7 @@ public class AdminMenu {
             new Login();
             break;
         case 5:
-            this.statistiques();
+            this.statistiques(); 
         default:
             break;
         }

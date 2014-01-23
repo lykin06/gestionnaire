@@ -39,8 +39,8 @@ public class BorrowerMenu {
     }
 
     private void studentMenu() {
-        System.out.println(this.getDatabase().getCurrentUser().getFirstName()
-                + " - " + this.getDatabase().getCurrentUser().toString());
+        System.out.println(this.database.getCurrentUser().getFirstName()
+                + " - " + this.database.getCurrentUser().toString());
         System.out.println("1. Voir le materiel emprunte");
         System.out.println("2. Emprunter du materiel");
         System.out.println("3. Rendre un materiel");
@@ -116,22 +116,31 @@ public class BorrowerMenu {
         Date start = new Date();
         System.out.println("1. Des aujourd'hui.\n2. Faire une reservation");
         int value = this.getManager().requestInt(1, 2);
-        int maxDebut = 1;
+        int maxStart = 1;
         if (value == 2) {
             if (user instanceof Student) {
-                maxDebut = 7;
+                maxStart = 7;
             } else {
-                maxDebut = 100; // TODO voir si c'est pas trop
+                maxStart = 20;
             }
             System.out.println("Dans combien de jours voulez-vous l'objet ("
-                    + maxDebut + " jours max):");
-            int jours = manager.requestInt(1, maxDebut);
+                    + maxStart + " jours max):");
+            int jours = manager.requestInt(1, maxStart);
             start = new Date(start.getYear(), start.getMonth(), start.getDate()
                     + jours);
         }
 
+        // Rendering date
+        int maxFinish = material.dureeMax(user instanceof Student);
+        System.out
+                .println("Pendant combien de jours voulez-vous garder l'objet (min 0, max "
+                        + maxFinish + "):");
+        int jours = manager.requestInt(0, maxFinish);
+        Date finish = new Date(start.getYear(), start.getMonth(), start.getDate()
+                + jours);
+
         listReservations.add(new Reservation((Borrower) user, material, start,
-                start));
+                finish));
         listMaterial
                 .getMaterials()
                 .get(indice)

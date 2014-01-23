@@ -1,6 +1,5 @@
 package Serialization;
 
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,64 +12,64 @@ import java.io.ObjectOutputStream;
  * @author Amir BEN SLIMANE
  */
 abstract public class Data {
-	static final long serialVersionUID = 2000200L;
-	
-	public static boolean store(Object data, String name) {
-		FileOutputStream file = null;
-		ObjectOutputStream out = null;
+    static final long serialVersionUID = 2000200L;
 
-		if (data == null) {
-			return false;
-		}
+    public static boolean store(Object data, String name) {
+        FileOutputStream file = null;
+        ObjectOutputStream out = null;
 
-		name = "Data/" + name + ".data";
+        if (data == null) {
+            return false;
+        }
 
-		try {
-			file = new FileOutputStream(name);
-			out = new ObjectOutputStream(file);
-			out.writeObject(data);
-			out.flush();
-			out.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-			return false;
-		}
+        name = "Data/" + name + ".data";
 
-		return true;
-	}
+        try {
+            file = new FileOutputStream(name);
+            out = new ObjectOutputStream(file);
+            out.writeObject(data);
+            out.flush();
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
 
-	public static Object load(String name) {
-		FileInputStream file = null;
-		ObjectInputStream in = null;
-		Object res = null;
+        return true;
+    }
 
-		name = "Data/" + name + ".data";
+    public static Object load(String name) {
+        FileInputStream file = null;
+        ObjectInputStream in = null;
+        Object res = null;
 
-		try {
-			file = new FileInputStream(name);
-		} catch (Exception e1) {
+        name = "Data/" + name + ".data";
 
-			name = "data/" + name;
-			try {
-				file = new FileInputStream(name);
-			} catch (Exception e2) {
-				return null;
-			}
-		}
+        try {
+            file = new FileInputStream(name);
+        } catch (Exception e1) {
 
-		try {
-			in = new ObjectInputStream(file);
-		} catch (Exception e) {
-			return null;
-		}
-		
-		try {
-			res = in.readObject();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+            name = "data/" + name + ".data";
+            try {
+                file = new FileInputStream(name);
+            } catch (Exception e2) {
+                return null;
+            }
+        }
 
-		return res;
-	}
+        try {
+            in = new ObjectInputStream(file);
+        } catch (Exception e) {
+            return null;
+        }
+
+        try {
+            res = in.readObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return res;
+    }
 }

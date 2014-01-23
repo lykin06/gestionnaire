@@ -13,19 +13,19 @@ Liens
 
 TODO
 ====
--  Gestion des statistiques
+-  Gestion des statistiques (Khady)
 -  gerer (pourcentage sur la durée max) : Les durées d'emprunt peuvent varier selon le type de matériel et le nombre d'exemplaire disponible.
--  autorisation d'emprunt : Un emprunt est acceptable si le matériel est disponible pendant la durée proposée et si il respecte les durées fixées.
--  changer la valeur du boolean dans la classe Reservation : Tout emprunt doit être accepté par un gestionnaire pour devenir effectif.
+-  autorisation d'emprunt : Un emprunt est acceptable si le matériel est disponible pendant la durée proposée et si il respecte les durées fixées. (Aurélien)
+-  changer la valeur du boolean dans la classe Reservation : Tout emprunt doit être accepté par un gestionnaire pour devenir effectif. (Aurélien)
 -  Les gestionnaires du	stock	décident de	l'achat	de nouveau matériel, de	l'envoi	en réparation	de certains	matériels, de	l'autorisation	de	l'emprunt	du matériel.
 -  Afficher les reservations en cours après l'affichage du matériel
--  Revoir le code actuel : getters / setters / refactorisation / etc...
+-  Revoir le code actuel : getters / setters / refactorisation / etc... (Tout le monde)
 
 
 DONE
 ====
--   Les etudients ne peuvent pas faire de réservation plus d'une semaine à l'avance.
--   gerer : Les étudiant peuvent emprunter le matériel sur une période courte (divisée par 2).
+-   Les etudients ne peuvent pas faire de réservation plus d'une semaine à l'avance. (Mathieu)
+-   gerer : Les étudiant peuvent emprunter le matériel sur une période courte (divisée par 2). (Mathieu)
   
 
 

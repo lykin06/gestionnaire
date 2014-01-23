@@ -65,7 +65,7 @@ int cpt=0;
 		
 	{	//ArrayList<Reservation> res= this.getReservationsOf(listBorrowing.get(i).getBorrower());
 		//for(int j=0; j<res.size();j++)
-			if(listBorrowing.get(i).equals(material))
+			if(listBorrowing.get(i).equals(material)) //TODO mettre un instanceOf au lieu de equals.
 				cpt++;
 			
 	}

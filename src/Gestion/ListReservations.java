@@ -116,7 +116,6 @@ public class ListReservations {
     }
     
     public void store() {
-        // Data.store(materials, "reservations");
         Data.store(this.reservations, "reservation");
     }
 

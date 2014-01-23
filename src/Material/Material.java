@@ -1,9 +1,6 @@
 package Material;
 
 import java.io.Serializable;
-import java.util.*;
-
-import Personnel.Borrower;
 
 /**
  * Material is the class representing all the Objects of the stock.

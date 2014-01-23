@@ -14,8 +14,8 @@ public class Menu {
 	private Personnel user;
 
 	public Menu(Database database) {
-		setDatabase(database);
-		setUser(this.getDatabase().getCurrentUser());
+		this.database = database;
+		this.user = this.database.getCurrentUser();
 		welcome();
 		displayMenu();
 	}
@@ -25,9 +25,9 @@ public class Menu {
 	 * Welcome message.
 	 */
 	private void welcome() {
-		System.out.println("Bienvenue " + this.getUser().getFirstName() + " "
-				+ this.getUser().getName() + " !");
-		System.out.println("Etant " + this.getUser().toString()
+		System.out.println("Bienvenue " + this.user.getFirstName() + " "
+				+ this.user.getName() + " !");
+		System.out.println("Etant " + this.user.toString()
 				+ ", voici vos options disponibles :");
 	}
 
@@ -36,10 +36,10 @@ public class Menu {
 	 * This method diplay the interface for the user.
 	 */
 	private void displayMenu() {
-		if (getUser() instanceof Administrator) {
-			new AdminMenu(getDatabase());
+		if (this.user instanceof Administrator) {
+			new AdminMenu(this.database);
 		} else {
-			new BorrowerMenu(getDatabase());
+			new BorrowerMenu(this.database);
 		}
 	}
 

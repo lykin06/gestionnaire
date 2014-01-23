@@ -237,14 +237,11 @@ public class AdminMenu {
         if (this.listReservations.getReservations().equals(null)) {
             System.out.println("Aucune demande de pret.");
         } else {
-            int cpt = 0;
             for (int i = 0; i < res.size(); i++) {
                 if (!res.get(i).isAccepted()) {
                     System.out.println((i) + res.get(i).toString());
-                    cpt++;
                 }
             }
-            // TODO reparer les autorisations.
 
             System.out.println("Quel demande de reservation autoriser ?");
             int indice = this.manager.requestInt(0, res.size()-1);//TODO peux etre mieux gerer le requestInt...
@@ -343,7 +340,7 @@ public class AdminMenu {
                     + " n'a pas ete trouve.");
         } else {
             this.addUser();
-            this.getDatabase().removeUser(userChanged);
+            this.database.removeUser(userChanged);
             System.out.println("Utilisateur modifie.");
         }
     }

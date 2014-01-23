@@ -21,8 +21,8 @@ public class Login {
     private Manager manager;
 
     public Login() {
-        this.setBdd(new Database());
-        this.setManager(new Manager());
+        this.database = new Database();
+        this.manager = new Manager();
         heading();
         goToMenu();
     }
@@ -62,9 +62,9 @@ public class Login {
         System.out
                 .println("Afin de vous connecter au serveur, veuillez entrer vos informations personnelles.");
         System.out.println("Entrez votre adresse mail :");
-        email = getManager().requestString();
+        email = this.manager.requestString();
         System.out.println("Entrez votre mot de passe :");
-        password = getManager().requestString();
+        password = this.manager.requestString();
 
         if (database.isAuthorized(email, password)) {
             return true;
@@ -93,7 +93,7 @@ public class Login {
         switch (value) {
         case 1:
             if (login()) {
-                new Menu(this.getDatabase());
+                new Menu(this.database);
             } else {
                 goToMenu();
             }

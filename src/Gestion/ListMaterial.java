@@ -55,7 +55,8 @@ public class ListMaterial {
      */
     public ArrayList<Material> load() {
         // TODO peut-on enlever ce warning
-        return (ArrayList<Material>) Data.load("material");
+    	return (ArrayList<Material>) Data.load("material");
+
     }
 
     /**
@@ -171,7 +172,6 @@ public class ListMaterial {
      * @see Data#store(Object, String)
      */
     public void store() {
-        // Data.store(materials, "reservations");
         Data.store(materials, "material");
     }
 }

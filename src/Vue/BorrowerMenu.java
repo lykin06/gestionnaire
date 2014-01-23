@@ -121,7 +121,7 @@ public class BorrowerMenu {
         // Date selection
         Date start = today;
         System.out.println("1. Des aujourd'hui.\n2. Faire une reservation");
-        int value = this.getManager().requestInt(1, 2);
+        int value = this.manager.requestInt(1, 2);
         int maxStart = 1;
         if (value == 2) {
             if (user instanceof Student) {
@@ -181,9 +181,9 @@ public class BorrowerMenu {
      * <b>Display user's reservation list</b>
      */
     private void displaysReservations() {
-        ArrayList<Reservation> reservations = this.getListReservations()
+        ArrayList<Reservation> reservations = this.listReservations
                 .getReservationsOf(
-                        (Borrower) this.getDatabase().getCurrentUser());
+                        (Borrower) this.database.getCurrentUser());
         if (reservations.isEmpty()) {
             System.out
                     .println("Vous n'avez pas emprunte de materiel (menu 2 pour emprunter).");

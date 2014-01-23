@@ -54,8 +54,8 @@ public class AdminMenu {
         System.out.println("1. Gestion des demandes de pret.");
         System.out.println("2. Gestion des utilisateurs.");
         System.out.println("3. Gestion du materiel");
-        System.out.println("4. Deconnexion");
-        System.out.println("5.Voir les statistiques actuelles");
+        System.out.println("4. Voir les statistiques actuelles");
+        System.out.println("5. Deconnexion");
 
         int value = this.manager.requestInt(1, 5);
 
@@ -70,10 +70,11 @@ public class AdminMenu {
             this.managementMaterial();
             break;
         case 4:
-            new Login();
+            this.statistiques();
             break;
         case 5:
-            this.statistiques(); 
+            new Login();
+            break; 
         default:
             break;
         }
@@ -91,8 +92,9 @@ public class AdminMenu {
         System.out.println("3. Modifier un utilisateur.");
         System.out.println("4. Supprimer un utilisateur.");
         System.out.println("5. Afficher la liste des utilisateurs inscrits");
+        System.out.println("6. Annuler");
 
-        int value = this.manager.requestInt(1, 5);
+        int value = this.manager.requestInt(1, 6);
 
         switch (value) {
         case 1:
@@ -109,6 +111,9 @@ public class AdminMenu {
             break;
         case 5:
             this.displayUsers();
+            break;
+        case 6:
+            this.adminMenu();
             break;
         default:
             break;

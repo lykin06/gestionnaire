@@ -28,15 +28,29 @@ public class Login {
     }
 
     /**
-     * 
      * this method display on the screen Welcome to this application.
      */
     private void heading() {
         System.out
                 .println("Bienvenue dans ce gestionnaire. Voici vos options disponibles :");
+    }
+
+    /**
+     * <b>Display the options of the menu</b>
+     * <p>
+     * The method display the options available to the user and return his
+     * choice.
+     * </p>
+     * 
+     * @return the user's choice
+     */
+    private int loginOptions() {
         System.out.println("1. Connexion.");
         System.out.println("2. Inscription");
         System.out.println("3. Quitter");
+        int answer = this.manager.requestInt(1, 3);
+
+        return answer;
     }
 
     /**
@@ -74,12 +88,12 @@ public class Login {
      * This method call goToMenu.
      */
     private void goToMenu() {
-        int value = this.getManager().requestInt(1, 3);
+        int value = this.loginOptions();
 
         switch (value) {
         case 1:
             if (login()) {
-                new Menu(this.getBdd());
+                new Menu(this.getDatabase());
             } else {
                 goToMenu();
             }
@@ -114,8 +128,8 @@ public class Login {
 
         switch (identifiant) {
         case 1:
-            database.addUser(new Unknown("administrateur", firstName, name, email,
-                    password, identifiant));
+            database.addUser(new Unknown("administrateur", firstName, name,
+                    email, password, identifiant));
             break;
         case 2:
             database.addUser(new Unknown("etudiant", firstName, name, email,
@@ -132,18 +146,18 @@ public class Login {
     }
 
     /**
-     * @return the bdd
+     * @return the database
      */
-    public Database getBdd() {
+    public Database getDatabase() {
         return database;
     }
 
     /**
-     * @param bdd
-     *            the bdd to set
+     * @param database
+     *            the database to set
      */
-    public void setBdd(Database bdd) {
-        this.database = bdd;
+    public void setBdd(Database database) {
+        this.database = database;
     }
 
     /**

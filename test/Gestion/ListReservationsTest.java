@@ -29,8 +29,9 @@ public class ListReservationsTest {
 		Borrower borrower = new Student(" ", " ", " ", " ", 0);
 		Date date = new Date();
 		Material material = new Material("Laptop");
-		Reservation reservation = new Reservation(borrower, material, date);
+		Reservation reservation = new Reservation(borrower, material, date, date);
 		assertTrue(listReservations.add(reservation));
 	}
 
 }
+

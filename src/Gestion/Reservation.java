@@ -16,14 +16,16 @@ import Personnel.Borrower;
 public class Reservation implements Serializable {
 	private Borrower borrower;
 	private Material material;
-	private Date date;
+	private Date start;
+	private Date finish;
 	private boolean accepted;
 
-	public Reservation(Borrower borrower, Material material, Date date) {
-		this.setBorrower(borrower);
-		this.setMaterial(material);
-		this.setDate(date);
-		this.setAccepted(false);
+	public Reservation(Borrower borrower, Material material, Date start, Date finish) {
+		this.borrower = borrower;
+		this.material = material;
+		this.start = start;
+		this.finish = finish;
+		this.accepted = false;
 	}
 
 	@Override
@@ -31,8 +33,19 @@ public class Reservation implements Serializable {
 	    // TODO revoir toString pour afficher si l'emprunt est accepte
 		String format = "dd/MM/yy";
 		SimpleDateFormat formater = new SimpleDateFormat(format);
-		return "Le " + formater.format(this.getDate())
-				+ ", vous avez emprunte un(e) " + this.getMaterial().toString();
+		StringBuilder str = new StringBuilder();
+		str.append(material.toString());
+		str.append(" - du ");
+		str.append(formater.format(start));
+		str.append(" au ");
+		str.append(formater.format(finish));
+		if(accepted) {
+		    str.append(" - acceptee");
+		} else {
+		    str.append(" - pas encore acceptee");
+		}
+		
+		return str.toString();
 	}
 
 	/**
@@ -69,7 +82,7 @@ public class Reservation implements Serializable {
 	 * @return the date
 	 */
 	public Date getDate() {
-		return date;
+		return start;
 	}
 
 	/**
@@ -77,12 +90,19 @@ public class Reservation implements Serializable {
 	 *            the date to set
 	 */
 	public void setDate(Date date) {
-		this.date = date;
+		this.start = date;
+	}
+	
+	public Date getFinish() {
+	    return finish;
+	}
+	
+	public void setFinish(Date finish) {
+	    this.finish = finish;
 	}
 
 	public boolean isAccepted() {
-		// TODO Auto-generated method stub
-		return false;
+		return accepted;
 	}
 
 	/**

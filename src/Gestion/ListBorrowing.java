@@ -65,7 +65,7 @@ int cpt=0;
 		
 	{	//ArrayList<Reservation> res= this.getReservationsOf(listBorrowing.get(i).getBorrower());
 		//for(int j=0; j<res.size();j++)
-			if(listBorrowing.get(i).equals(material)) //TODO mettre un instanceOf au lieu de equals.
+			if(listBorrowing.get(i).getClass().equals(material)) //TODO mettre un instanceOf au lieu de equals.
 				cpt++;
 			
 	}
@@ -77,14 +77,25 @@ public String leplusEmprunte(){
 	int nHeadphone =this.getNombreReserveOf(head);int nLaptop =this.getNombreReserveOf(lap);
 	int nPhone =this.getNombreReserveOf(phone);int nTablet =this.getNombreReserveOf(tab);
 	int nWithOS=this.getNombreReserveOf(os);
-	if( nHeadphone >max)
-		{max=nHeadphone;mat="headphone";}
-	if( nPhone >max)
-	{max=nPhone;mat="phone";}
-	if( nLaptop >max)
-	{max=nLaptop;mat="laptop";}
-	if( nWithOS>max)
-	{max=nWithOS;mat="withOS";}
+	if( nHeadphone >max){
+		max=nHeadphone;
+		mat="headphone";
+	}
+	if( nPhone >max){
+		max=nPhone;
+		mat="phone";
+	}
+	if( nLaptop >max){
+		max=nLaptop;
+		mat="laptop";
+	}
+	if( nWithOS>max){
+		max=nWithOS;
+		mat="withOS";
+	}
+	if(max==0){
+		mat="Null";
+	}
 	
 	//for(int i =0 ; i<this.listBorrowing.size(); i++){
 	//if(listBorrowing.getMaterial().equals(Camera))

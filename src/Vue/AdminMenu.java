@@ -503,9 +503,13 @@ public class AdminMenu {
         int rep = this.manager.requestInt(1, 2);
         switch (rep) {
         case 1:
-            System.out
-                    .println("le material le plus emprunte est actuellement: "
-                            + this.listBorrowing.leplusEmprunte());
+        	String leplusemprunte=this.listBorrowing.leplusEmprunte();
+        	if(leplusemprunte.equals("Null")){
+        		System.out.println("Aucun emprunts en cours. Impossible de savoir quel materiel est le plus emprunte");
+        	}
+        	else{
+        		System.out.println("le material le plus emprunte est actuellement: "+ leplusemprunte);
+        	}
             break;
         case 2:
             this.emprunteur();

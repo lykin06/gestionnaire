@@ -73,7 +73,7 @@ public class AdminMenu {
             new Login();
             break;
         case 5:
-            this.statistiques();
+            this.statistiques(); 
         default:
             break;
         }
@@ -497,7 +497,7 @@ public class AdminMenu {
         switch (rep) {
         case 1:
             System.out
-                    .println("le material le plus emprunté est actuellement: "
+                    .println("le material le plus emprunte est actuellement: "
                             + this.listBorrowing.leplusEmprunte());
             break;
         case 2:

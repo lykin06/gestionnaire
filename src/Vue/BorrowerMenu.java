@@ -83,18 +83,27 @@ public class BorrowerMenu {
                     .println("Quel materiel voulez-vous rendre ? (pour annuler: "
                             + (reservations.size() + 1) + ")");
             int indice = this.manager.requestInt(1, reservations.size() + 1) - 1;
-            if (indice == reservations.size()) {
+            if (indice == reservations.size() ) {
                 return;
             }
-            Reservation reservationDelete = reservations.get(indice);
+            else {
+            	Reservation reservationDelete = reservations.get(indice);
+            
             reservations
                     .get(indice)
                     .getMaterial()
                     .setQuantity(
                             reservations.get(indice).getMaterial()
                                     .getQuantity() + 1);
+            if (reservationDelete.getFinish().before(today)){
+            	Borrower b=(Borrower) this.database.getCurrentUser();
+            	b.setCompteur(b.getCompteur()+1);
+            }
             reservations.remove(indice);
             this.listReservations.remove(reservationDelete);
+           
+            
+        }
         }
     }
 

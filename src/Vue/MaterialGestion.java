@@ -69,7 +69,7 @@ public class MaterialGestion {
             this.removeMaterial();
             break;
         case 3:
-            this.displayMaterials(true);
+            System.out.println(this.displayMaterials(true));
             break;
         case 4:
             this.listMaterial.reinitialize();
@@ -96,7 +96,7 @@ public class MaterialGestion {
     private void addMaterial() {
         ArrayList<Material> materials = this.listMaterial.getMaterials();
 
-        this.displayMaterials(false);
+        System.out.println(this.displayMaterials(false));
         System.out
                 .println("Quel est le materiel que vous souhaitez ajouter au stock ?");
         int indice = this.manager.requestInt(1, materials.size()) - 1;
@@ -119,7 +119,7 @@ public class MaterialGestion {
      */
     private void removeMaterial() {
         ArrayList<Material> materials = this.listMaterial.getMaterials();
-        this.displayMaterials(false);
+        System.out.println(this.displayMaterials(false));
 
         System.out
                 .println("Quel est le materiel que vous souhaitez retirer du stock ?");
@@ -149,30 +149,41 @@ public class MaterialGestion {
     /**
      * <b>Show the material in the stock</b>
      */
-    private void displayMaterials(boolean withResa) {
+    private String displayMaterials(boolean withResa) {
         ArrayList<Material> materials = this.listMaterial.getMaterials();
-
-        System.out.println("Le stock contient :");
-        for (int i = 0; i < materials.size(); i++) {
-            System.out.println(materials.get(i).toString() + " ["
-                    + materials.get(i).getQuantity() + "]");
+        StringBuilder str = new StringBuilder();
+        
+        
+        str.append("Le stock contient :\n");
+        for (int i = 0; i < materials.size(); ++i) {
+            str.append(materials.get(i).toString());
+            str.append(" [");
+            str.append(materials.get(i).getQuantity());
+            str.append("]\n");
         }
 
         if (withResa) {
-            System.out.println("Liste des reservations acceptes :\n");
-            this.displayReservationsAccepted();
+            str.append("\nListe des reservations acceptes :\n");
+            str.append(this.displayReservationsAccepted());
         }
-
+        return str.toString();
     }
 
-    private void displayReservationsAccepted() {
+    /**
+     * <b>Show the material in reservation</b>
+     */
+    private String displayReservationsAccepted() {
         ArrayList<Reservation> res = this.listReservations.getReservations();
+        StringBuilder str = new StringBuilder();
+        
         for (int i = 0; i < res.size(); i++) {
             if (res.get(i).isAccepted()) {
-                System.out.println((i) + " - " + res.get(i).toString());
+                str.append(i);
+                str.append(" - ");
+                str.append(res.get(i).toString());
             }
         }
-        System.out.println();
+        return str.toString();
     }
 
 }

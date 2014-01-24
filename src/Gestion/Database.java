@@ -397,9 +397,8 @@ public class Database {
 
     public String toStringList(ArrayList<Personnel> list) {
         StringBuilder str = new StringBuilder();
-
-        for (int i = 0; i < administrators.size(); ++i) {
-            str.append(administrators.get(i).toStringLong());
+        for (int i = 0; i < list.size(); ++i) {
+            str.append(list.get(i).toStringLong());
             str.append('\n');
         }
         return str.toString();

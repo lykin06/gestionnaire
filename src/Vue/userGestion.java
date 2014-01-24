@@ -223,6 +223,6 @@ public class userGestion {
      * <b>Display all the users</b>
      */
     private void displayUsers() {
-        System.out.println(database);
+        System.out.println(database.toString());
     }
 }

@@ -129,7 +129,7 @@ public class Personnel implements Serializable {
         str.append(identifiant);
         str.append(".\t");
         str.append(firstName);
-        str.append(" ");
+        str.append("\t");
         str.append(name);
         str.append("\t");
         str.append(email);

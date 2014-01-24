@@ -1,11 +1,14 @@
 package Vue;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import Gestion.Database;
 import Gestion.ListMaterial;
+import Gestion.ListReparation;
 import Gestion.ListReservations;
 import Gestion.Manager;
+import Gestion.Reparation;
 import Gestion.Reservation;
 import Material.Material;
 import Personnel.Administrator;
@@ -25,6 +28,7 @@ public class MaterialGestion {
     private Database database;
     private ListMaterial listMaterial;
     private ListReservations listReservations;
+    private ListReparation listReparations;
 
     public MaterialGestion(Database database, Administrator administrator,
             Manager manager, ListMaterial listMaterial,
@@ -34,6 +38,11 @@ public class MaterialGestion {
         this.user = administrator;
         this.listMaterial = listMaterial;
         this.listReservations = listReservations;
+
+        this.listReparations = new ListReparation();
+        if (this.listReparations.getReparation() == null) {
+            this.listReparations.reinitialize();
+        }
 
         this.managementMaterial();
     }
@@ -54,12 +63,14 @@ public class MaterialGestion {
     private void managementMaterial() {
         System.out.println("1. Ajouter un materiel.");
         System.out.println("2. Supprimer un materiel.");
-        System.out.println("3. Afficher la liste des materiels");
+        System.out.println("3. Envoyer du materiel en reparation.");
+        System.out.println("4. Reccuperer le materiel repare.");
+        System.out.println("5. Afficher la liste des materiels");
         System.out
-                .println("4. Reinitialiser le stock de materiel (!Attention cela va Reinitialiser les reservations)");
-        System.out.println("5. Retour");
+                .println("6. Reinitialiser le stock de materiel (!Attention cela va Reinitialiser les reservations)");
+        System.out.println("7. Retour");
 
-        int value = this.manager.requestInt(1, 5);
+        int value = this.manager.requestInt(1, 7);
 
         switch (value) {
         case 1:
@@ -69,13 +80,22 @@ public class MaterialGestion {
             this.removeMaterial();
             break;
         case 3:
-            System.out.println(this.displayMaterials(true));
+            this.addReparation();
             break;
         case 4:
-            this.listMaterial.reinitialize();
-            this.listReservations.reinitialize();
+            this.recoverReparation();
             break;
         case 5:
+            System.out.println(this.displayMaterials(true));
+            break;
+        case 6:
+            this.listMaterial.reinitialize();
+            this.listReservations.reinitialize();
+            if (!this.listReparations.reinitialize()) {
+                System.err.println("Store in the file failed.");
+            }
+            break;
+        case 7:
             new AdminMenu(database, user);
             return;
         default:
@@ -125,7 +145,7 @@ public class MaterialGestion {
                 .println("Quel est le materiel que vous souhaitez retirer du stock ?");
         int indice = this.manager.requestInt(1, materials.size()) - 1;
         Material material = materials.get(indice);
-        
+
         if (material.isEmpty()) {
             System.out.println("Aucun materiel à enlever.");
             return;
@@ -150,21 +170,16 @@ public class MaterialGestion {
      * <b>Show the material in the stock</b>
      */
     private String displayMaterials(boolean withResa) {
-        ArrayList<Material> materials = this.listMaterial.getMaterials();
         StringBuilder str = new StringBuilder();
-        
-        
+
         str.append("Le stock contient :\n");
-        for (int i = 0; i < materials.size(); ++i) {
-            str.append(materials.get(i).toString());
-            str.append(" [");
-            str.append(materials.get(i).getQuantity());
-            str.append("]\n");
-        }
+        str.append(listMaterial.toString());
 
         if (withResa) {
             str.append("\nListe des reservations acceptes :\n");
             str.append(this.displayReservationsAccepted());
+            str.append("\nListe des reparations en cours : \n");
+            str.append(this.listReparations.toString());
         }
         return str.toString();
     }
@@ -175,7 +190,7 @@ public class MaterialGestion {
     private String displayReservationsAccepted() {
         ArrayList<Reservation> res = this.listReservations.getReservations();
         StringBuilder str = new StringBuilder();
-        
+
         for (int i = 0; i < res.size(); i++) {
             if (res.get(i).isAccepted()) {
                 str.append(i);
@@ -184,6 +199,64 @@ public class MaterialGestion {
             }
         }
         return str.toString();
+    }
+
+    /**
+     * <b>Send some materials to Reparation</b>
+     */
+    private void addReparation() {
+        ArrayList<Material> materials = this.listMaterial.getMaterials();
+        System.out.println(this.displayMaterials(false));
+        System.out.println("Quel materiel faut-il envoyer en reparation ?");
+
+        int indice = this.manager.requestInt(1, materials.size()) - 1;
+        Material material = materials.get(indice);
+
+        if (material.isEmpty()) {
+            System.out.println("Aucun materiel à enlever.");
+            return;
+        }
+
+        int max = material.getQuantity();
+        System.out
+                .println("Combien de matriel voulez-vous envoyer en reparation ? (maximum "
+                        + max + ")");
+        int quantity = manager.requestInt(0, max);
+
+        listReparations.add(new Reparation(material, quantity));
+        listMaterial.getMaterials().get(indice).setQuantity(max - quantity);
+        listMaterial.store();
+    }
+
+    /**
+     * <b>Recover the finished Reparations</b>
+     */
+    private void recoverReparation() {
+        ArrayList<Reparation> reparations = this.listReparations
+                .getReparation();
+        ArrayList<Material> materials = this.listMaterial.getMaterials();
+
+        Date today = new Date();
+
+        for (int i = 0; i < reparations.size(); ++i) {
+            Reparation reparation = reparations.get(i);
+
+            if (reparation.getFinish().before(today)) {
+                int indice = this.listMaterial.getIndice(reparation
+                        .getMaterial());
+                if (indice < 0) {
+                    System.err.println("This material is not in listMaterial");
+                    return;
+                }
+                int quantity = materials.get(indice).getQuantity()
+                        + reparation.getNumber();
+                materials.get(indice).setQuantity(quantity);
+                
+                this.listReparations.remove(reparation);
+            }
+        }
+        
+        this.listMaterial.setMaterials(materials);
     }
 
 }

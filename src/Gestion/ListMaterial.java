@@ -168,4 +168,17 @@ public class ListMaterial {
     public void store() {
         Data.store(materials, "material");
     }
+
+    /**
+     * @param material
+     * @return the indice in the list of material
+     */
+    public int getIndice(Material material) {
+        for (int i = 0; i < materials.size(); ++i) {
+            if (material.getClass().equals(materials.get(i).getClass())) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }

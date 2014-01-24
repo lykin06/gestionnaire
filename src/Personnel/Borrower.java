@@ -7,9 +7,11 @@ package Personnel;
  * 
  */
 public class Borrower extends Personnel {
+	private int cpt;
 	public Borrower(String firstName, String name, String email,
 			String password, int identifiant) {
 		super(firstName, name, email, password, identifiant);
+		this.cpt=0;
 	}
 
 	public boolean equals(Borrower borrower) {

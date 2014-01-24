@@ -207,21 +207,29 @@ public class AdminMenu {
 
     private void managementLoan() {
         ArrayList<Reservation> res = this.listReservations.getReservations();
-        if (this.listReservations.getReservations().equals(null)) {
+        boolean isaccepted=false;
+        for (int j = 0; j < res.size(); j++) {
+            if (!res.get(j).isAccepted()) {
+                isaccepted=true;
+                break;
+            }
+        }
+        if (isaccepted==false) {
             System.out.println("Aucune demande de pret.");
         } else {
             for (int i = 0; i < res.size(); i++) {
                 if (!res.get(i).isAccepted()) {
-                    System.out.println((i) + res.get(i).toString());
+                    System.out.println((i) + " - " + res.get(i).toString());
                 }
             }
 
             System.out.println("Quel demande de reservation autoriser ?");
-            int indice = this.manager.requestInt(0, res.size() - 1);// TODO peux
-                                                                    // etre
-                                                                    // mieux
-                                                                    // gerer le
-                                                                    // requestInt...
+            int indice = this.manager.requestInt(0, res.size() - 1);
+            while(res.get(indice).isAccepted()){
+            	indice = this.manager.requestInt(0, res.size() - 1);
+            }
+            
+            
             this.listReservations.authorize(this.listReservations
                     .getReservations().get(indice));
             this.listReservations.store();

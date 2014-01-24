@@ -9,8 +9,9 @@ enseignant ; Peter ; Sander ; sander@unice.fr ; peter ; 5 ; 0
 enseignant ; Igor ; Litovsky ; lito@polytech.unice.fr ; igor ; 6 ; 0
 administrateur ; ARE ;   ;   ;   ; 7 ; 0
 administrateur ;   ;   ;   ;   ; 7 ; 0
-etudiant ; Amir ; Ben slimane ; maeaz ; zae ; 12 ; 0
-etudiant ; null ; null ; 1234 ; 12 ; 3 ; 0
 etudiant ; Mathieu ; Boutelier ; lykin06@gmail.com ; passe ; 15 ; 0
 enseignant ; professeur ; tournesol ; 4321 ; 21 ; 21
-inconnu ; kha ; fall ; kha@hotmail.fr ; passe ; 1 ; 0
+enseignant ; professeur ; tournesol ; 4321 ; 21 ; 21 ; 0
+
+
+administrateur ; kha ; fall ; kha@hotmail.fr ; passe ; 22 ; 0

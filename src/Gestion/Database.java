@@ -240,6 +240,17 @@ public class Database {
     public boolean addUser(Personnel user) {
         boolean b;
         String[] text = new String[7];
+        
+        // Add to the list
+        if (user instanceof Administrator) {
+            administrators.add(user);
+        } else if (user instanceof Student) {
+            students.add(user);
+        } else if (user instanceof Teacher) {
+            teachers.add(user);
+        } else {
+            unknown.add(user);
+        }
 
         text[0] = user.toString();
         text[1] = user.getFirstName();
@@ -254,7 +265,7 @@ public class Database {
         }
 
         b = Text.store(text, "users");
-        load();
+    //    load();
         return b;
     }
 
@@ -269,6 +280,17 @@ public class Database {
     public void removeUser(Personnel user) {
         String[] bdd = Text.load("users");
         int line = -1;
+        
+        // Delete from the list
+        if (user instanceof Administrator) {
+            administrators.remove(user);
+        } else if (user instanceof Student) {
+            students.remove(user);
+        } else if (user instanceof Teacher) {
+            teachers.remove(user);
+        } else {
+            unknown.remove(user);
+        }
 
         // We search the line to delete
         for (int i = 0; i < bdd.length; ++i) {
@@ -283,8 +305,6 @@ public class Database {
             Text.deleteLine("users", line);
         } catch (Exception e) {
         }
-
-        load();
     }
 
     /**

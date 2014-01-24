@@ -26,13 +26,11 @@ public class userGestion {
     private Database database;
     private ListReservations listReservations;
 
-    public userGestion(Database database, Administrator administrator) {
-        this.manager = new Manager();
+    public userGestion(Database database, Administrator administrator,
+            Manager manager, ListReservations listReservations) {
+        this.manager = manager;
         this.database = database;
-        this.listReservations = new ListReservations();
-        if (this.listReservations == null) {
-            this.listReservations.reinitialize();
-        }
+        this.listReservations = listReservations;
         this.user = administrator;
         this.managementUser();
     }

@@ -39,37 +39,48 @@ abstract public class Data {
     }
 
     public static Object load(String name) {
-        FileInputStream file = null;
+        FileInputStream file = openFile(name);
         ObjectInputStream in = null;
-        Object res = null;
-
-        name = "Data/" + name + ".data";
-
-        try {
-            file = new FileInputStream(name);
-        } catch (Exception e1) {
-
-            name = "data/" + name + ".data";
-            try {
-                file = new FileInputStream(name);
-            } catch (Exception e2) {
-                return null;
-            }
-        }
 
         try {
             in = new ObjectInputStream(file);
-        } catch (Exception e) {
-            return null;
-        }
-
-        try {
-            res = in.readObject();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
 
-        return res;
+        try {
+            return in.readObject(); // TODO cette ligne plante !!!
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private static FileInputStream openFile(String name) {
+        StringBuilder str = new StringBuilder();
+        str.append("Data/");
+        str.append(name);
+        str.append(".data");
+
+        String fileName = str.toString();
+
+        try {
+            return new FileInputStream(fileName);
+        } catch (Exception e1) {
+            System.err.println("Unable to open file - try something else");
+
+            str = new StringBuilder();
+            str.append(name);
+            str.append(".data");
+
+            fileName = str.toString();
+            try {
+                return new FileInputStream(fileName);
+            } catch (Exception e2) {
+                System.err.println("Unable to open file");
+                return null;
+            }
+        }
     }
 }

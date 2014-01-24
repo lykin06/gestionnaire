@@ -77,7 +77,7 @@ public class AdminMenu {
             this.managementLoan();
             break;
         case 2:
-            new userGestion(database, user);
+            new userGestion(database, user, manager,listReservations);
             break;
         case 3:
             this.managementMaterial();

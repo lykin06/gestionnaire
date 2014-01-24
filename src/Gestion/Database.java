@@ -3,6 +3,7 @@ package Gestion;
 import java.util.ArrayList;
 
 import Personnel.Administrator;
+import Personnel.Borrower;
 import Personnel.Personnel;
 import Personnel.Student;
 import Personnel.Teacher;
@@ -71,12 +72,12 @@ public class Database {
 
         String[] line;
         String nature, firstName, name, email, password;
-        int identifiant;
+        int identifiant, delay;
 
         for (int i = 0; i < bdd.length; i++) {
             line = bdd[i].split(";");
 
-            if (line.length != 6) {
+            if (line.length != 7) {
                 continue;
             }
 
@@ -87,6 +88,7 @@ public class Database {
                 email = line[3].trim();
                 password = line[4].trim();
                 identifiant = Integer.parseInt(line[5].trim());
+                delay = Integer.parseInt(line[6].trim());
 
                 switch (nature) {
                 case "administrateur":
@@ -95,11 +97,11 @@ public class Database {
                     break;
                 case "etudiant":
                     students.add(new Student(firstName, name, email, password,
-                            identifiant));
+                            identifiant, delay));
                     break;
                 case "enseignant":
                     teachers.add(new Teacher(firstName, name, email, password,
-                            identifiant));
+                            identifiant, delay));
                     break;
                 case "inconnu":
                     try {
@@ -219,7 +221,7 @@ public class Database {
      */
     public boolean addUser(Personnel user) {
         boolean b;
-        String[] text = new String[6];
+        String[] text = new String[7];
 
         text[0] = user.toString();
         text[1] = user.getFirstName();
@@ -227,6 +229,11 @@ public class Database {
         text[3] = user.getEmail();
         text[4] = user.getPassword();
         text[5] = Integer.toString(user.getIdentifiant());
+        if (user instanceof Borrower) {
+            text[6] = Integer.toString(((Borrower) user).getCompteur());
+        } else {
+            text[6] = Integer.toString(0);
+        }
 
         b = Text.store(text, "users");
         load();

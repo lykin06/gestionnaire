@@ -8,8 +8,8 @@ package Personnel;
  */
 public class Student extends Borrower {
 	public Student(String firstName, String name, String email,
-			String password, int identifiant) {
-		super(firstName, name, email, password, identifiant);
+			String password, int identifiant, int delay) {
+		super(firstName, name, email, password, identifiant, delay);
 	}
 
 	@Override

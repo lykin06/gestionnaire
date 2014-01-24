@@ -380,12 +380,12 @@ public class AdminMenu {
         case 2:
             this.database.addUser(new Student(user.getFirstName(), user
                     .getName(), user.getEmail(), user.getPassword(),
-                    identifiant));
+                    identifiant, 0));
             return;
         case 3:
-            this.database.addUser(new Student(user.getFirstName(), user
+            this.database.addUser(new Teacher(user.getFirstName(), user
                     .getName(), user.getEmail(), user.getPassword(),
-                    identifiant));
+                    identifiant, 0));
             return;
         }
 
@@ -420,11 +420,11 @@ public class AdminMenu {
             break;
         case 2:
             this.database.addUser(new Teacher(firstName, name, email, password,
-                    identifiant));
+                    identifiant, 0));
             break;
         case 3:
             this.database.addUser(new Student(firstName, name, email, password,
-                    identifiant));
+                    identifiant, 0));
             break;
         }
 

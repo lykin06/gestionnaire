@@ -7,30 +7,32 @@ package Personnel;
  * 
  */
 public class Borrower extends Personnel {
-	private int cpt;
-	public Borrower(String firstName, String name, String email,
-			String password, int identifiant) {
-		super(firstName, name, email, password, identifiant);
-		this.cpt=0;
-	}
+    private int delay;
 
-	public boolean equals(Borrower borrower) {
-		if (this.getEmail().equals(borrower.getEmail())
-				&& this.getFirstName().equals(borrower.getFirstName())
-				&& this.getIdentifiant() == borrower.getIdentifiant()
-				&& this.getName().equals(borrower.getName())
-				&& this.getPassword().equals(borrower.getPassword())
-				&& this.cpt == borrower.getCompteur()) {
-			return true;
-		}
-		return false;
-	}
-	
-	public int getCompteur(){
-		return this.cpt;
-	}
-	public void setCompteur(int compteur){
-		this.cpt=compteur;
-		
-	}
+    public Borrower(String firstName, String name, String email,
+            String password, int identifiant, int delay) {
+        super(firstName, name, email, password, identifiant);
+        this.delay = delay;
+    }
+
+    public boolean equals(Borrower borrower) {
+        if (this.getEmail().equals(borrower.getEmail())
+                && this.getFirstName().equals(borrower.getFirstName())
+                && this.getIdentifiant() == borrower.getIdentifiant()
+                && this.getName().equals(borrower.getName())
+                && this.getPassword().equals(borrower.getPassword())
+                && this.delay == borrower.getCompteur()) {
+            return true;
+        }
+        return false;
+    }
+
+    public int getCompteur() {
+        return this.delay;
+    }
+
+    public void setCompteur(int compteur) {
+        this.delay = compteur;
+
+    }
 }

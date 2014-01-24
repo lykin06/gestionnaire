@@ -16,9 +16,11 @@ public class Manager {
 		try {
 			value = Integer.parseInt(requestString());
 			if (value < min || value > max) {
+				System.out.println("Mauvaise entree veuillez resaisir votre demande svp.");
 				return requestInt(min, max);
 			}
 		} catch (Exception e) {
+			System.out.println("Mauvaise entree veuillez resaisir votre demande svp.");
 			return requestInt(min, max);
 		}
 

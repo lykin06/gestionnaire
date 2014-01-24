@@ -223,16 +223,24 @@ public class AdminMenu {
                 }
             }
 
-            System.out.println("Quel demande de reservation autoriser ?");
-            int indice = this.manager.requestInt(0, res.size() - 1);
-            while(res.get(indice).isAccepted()){
-            	indice = this.manager.requestInt(0, res.size() - 1);
+            System.out.println("Quel demande de reservation autoriser ? (-1 pour quitter)");
+
+            int indice = this.manager.requestInt(-1, res.size() - 1);
+            if(indice!=-1){
+	            while(res.get(indice).isAccepted()){
+	            	System.out.println("Mauvaise entree veuillez resaisir votre demande svp.");
+	            	indice = this.manager.requestInt(-1, res.size() - 1);
+	            	if(indice==-1){
+	            		break;
+	            	}
+	            }
+	            
+	            if(indice!=-1){
+		            this.listReservations.authorize(this.listReservations
+		                    .getReservations().get(indice));
+		            this.listReservations.store();
+	            }
             }
-            
-            
-            this.listReservations.authorize(this.listReservations
-                    .getReservations().get(indice));
-            this.listReservations.store();
 
         }
     }

@@ -10,9 +10,6 @@ import Config.Config;
  */
 public class Laptop extends WithOS {
 	public Laptop(String os) {
-		super(os);
-		this.setName("ordinateur");
-		this.setDureeEmprunt(Config.DUREE_EMPRUNT_CAMERA);
-		this.setQuantity(Config.QUANTITE_INITIAL_LAPTOP);
+		super(os, "ordinateur", Config.DUREE_EMPRUNT_LAPTOP, Config.QUANTITE_INITIAL_LAPTOP);
 	}
 }

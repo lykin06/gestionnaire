@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import Config.Config;
 import Gestion.Database;
-import Gestion.ListReservations;
 import Gestion.Manager;
 import Personnel.Administrator;
 import Personnel.Personnel;
@@ -24,13 +23,11 @@ public class UserGestion {
     private Administrator user;
     private Manager manager;
     private Database database;
-    private ListReservations listReservations;
 
     public UserGestion(Database database, Administrator administrator,
-            Manager manager, ListReservations listReservations) {
+            Manager manager) {
         this.manager = manager;
         this.database = database;
-        this.listReservations = listReservations;
         this.user = administrator;
         this.managementUser();
     }
@@ -38,7 +35,7 @@ public class UserGestion {
     /**
      * <b>Shows the command on users</b>
      * <p>
-     * An administarator can do the following actions on users:
+     * An administrator can do the following actions on users:
      * <ul>
      * <li>Add a new user</li>
      * <li>Confirm an inscription</li>
@@ -54,7 +51,7 @@ public class UserGestion {
         System.out.println("3. Modifier un utilisateur.");
         System.out.println("4. Supprimer un utilisateur.");
         System.out.println("5. Afficher la liste des utilisateurs inscrits");
-        System.out.println("6. Annuler");
+        System.out.println("6. Retour");
 
         int value = this.manager.requestInt(1, 6);
 
@@ -74,11 +71,14 @@ public class UserGestion {
         case 5:
             this.displayUsers();
             break;
+        case 6:
+            new AdminMenu(database, user);
+            return;
         default:
             break;
         }
 
-        new AdminMenu(database, user);
+        this.managementUser();
     }
 
     /**

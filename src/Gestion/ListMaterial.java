@@ -164,6 +164,7 @@ public class ListMaterial {
     public void setMaterials(ArrayList<Material> materials) {
         this.materials = materials;
         this.size = this.materials.size();
+        this.store();
     }
 
     /**

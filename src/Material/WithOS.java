@@ -9,9 +9,9 @@ package Material;
 public class WithOS extends Material {
 	private String os;
 
-	public WithOS(String os) {
-		super("");
-		this.setOs(os);
+	public WithOS(String os, String name, int dureeEmprunt, int quantity) {
+		super(name, dureeEmprunt, quantity);
+		this.os = os;
 	}
 
 	/**

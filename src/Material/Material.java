@@ -13,9 +13,10 @@ public class Material implements Serializable {
     private int quantity;
     private String name;
 
-    public Material(String name) {
-        this.setDureeEmprunt(0);
-        this.setName(name);
+    public Material(String name, int dureeEmprunt, int quantity) {
+        this.dureeEmprunt = dureeEmprunt;
+        this.name = name;
+        this.quantity = quantity;
     }
 
     public int getDureeEmprunt() {

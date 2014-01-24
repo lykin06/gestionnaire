@@ -11,9 +11,6 @@ import Config.Config;
 public class Tablet extends WithOS {
 
 	public Tablet(String os) {
-		super(os);
-		this.setName("tablette");
-		this.setDureeEmprunt(Config.DUREE_EMPRUNT_TABLET);
-		this.setQuantity(Config.QUANTITE_INITIAL_TABLET);
+		super(os, "tablette", Config.DUREE_EMPRUNT_TABLET, Config.QUANTITE_INITIAL_TABLET);
 	}
 }

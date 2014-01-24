@@ -11,7 +11,7 @@ public class MaterialTest {
 
 	@Before
 	public void setUp() throws Exception {
-		material = new Material("name");
+		material = new Material("name", 0, 0);
 	}
 
 	@After

@@ -11,8 +11,6 @@ import Config.Config;
 public class Camera extends Material {
 
     public Camera() {
-		super("camera");
-		this.setDureeEmprunt(Config.DUREE_EMPRUNT_CAMERA);
-		this.setQuantity(Config.QUANTITE_INITIAL_CAMERA);
+		super("camera", Config.DUREE_EMPRUNT_CAMERA, Config.QUANTITE_INITIAL_CAMERA);
 	}
 }

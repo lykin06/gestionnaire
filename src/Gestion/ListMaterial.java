@@ -29,11 +29,6 @@ public class ListMaterial {
     private ArrayList<Material> materials;
 
     /**
-     * Size of the list
-     */
-    private int size;
-
-    /**
      * <b>Constructor</b>
      * <p>
      * Generate the list of materials from the file.
@@ -41,7 +36,6 @@ public class ListMaterial {
      */
     public ListMaterial() {
         this.materials = this.load();
-        this.size = this.materials.size();
     }
 
     /**
@@ -73,7 +67,7 @@ public class ListMaterial {
     public String avaibleMaterials(boolean isStudent) {
 
         StringBuilder str = new StringBuilder();
-        for (int i = 0; i < this.size; ++i) {
+        for (int i = 0; i < materials.size(); ++i) {
             if (this.isNotAvailable(isStudent, materials.get(i))) {
                 continue; // Skip this index
             }
@@ -137,7 +131,7 @@ public class ListMaterial {
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
-        for (int i = 0; i < size; ++i) {
+        for (int i = 0; i < materials.size(); ++i) {
             str.append(i + 1);
             str.append(". ");
             str.append(materials.get(i).toString());
@@ -163,7 +157,6 @@ public class ListMaterial {
      */
     public void setMaterials(ArrayList<Material> materials) {
         this.materials = materials;
-        this.size = this.materials.size();
         this.store();
     }
 

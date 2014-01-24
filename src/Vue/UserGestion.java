@@ -20,13 +20,13 @@ import Personnel.Teacher;
  * @author mathieu BOUTELIER
  * 
  */
-public class userGestion {
+public class UserGestion {
     private Administrator user;
     private Manager manager;
     private Database database;
     private ListReservations listReservations;
 
-    public userGestion(Database database, Administrator administrator,
+    public UserGestion(Database database, Administrator administrator,
             Manager manager, ListReservations listReservations) {
         this.manager = manager;
         this.database = database;

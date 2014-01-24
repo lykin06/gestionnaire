@@ -120,4 +120,20 @@ public class Personnel implements Serializable {
 	public String toString() {
 		return "" + this.getFirstName() + " " + this.getName();
 	}
+	
+	/**
+	 * @return the user's information
+	 */
+	public String toStringLong() {
+	    StringBuilder str = new StringBuilder();
+	    str.append(identifiant);
+	    str.append(".\t");
+	    str.append(firstName);
+	    str.append(" ");
+	    str.append(name);
+	    str.append("\t");
+	    str.append(email);
+	    
+	    return str.toString();
+	}
 }

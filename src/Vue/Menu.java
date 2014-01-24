@@ -37,7 +37,7 @@ public class Menu {
 	 */
 	private void displayMenu() {
 		if (this.user instanceof Administrator) {
-			new AdminMenu(this.database);
+			new AdminMenu(this.database, (Administrator) this.user);
 		} else {
 			new BorrowerMenu(this.database);
 		}

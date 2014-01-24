@@ -1,19 +1,16 @@
 /**
-*	[nature] ; [pr�nom] ; [nom] ; [email] ; [mot de passe] ; [identifiant]
+*	[nature] ; [prenom] ; [nom] ; [email] ; [mot de passe] ; [identifiant] ; [rendu en retard]
 **/
-administrateur ; root ; root ; root@root.com ; root ; 1 
-etudiant ; Amir ; Ben Slimane ; benslima@unice.fr ; amir ; 2
-etudiant ; Aurelien ; Colombet ; colombet@polytech.unice.fr ; aurelien ; 3
-enseignant ; Anne-Marie ; Pinna-Dery ; pinna@polytech.unice.fr ; anne ; 4
-enseignant ; Peter ; Sander ; sander@unice.fr ; peter ; 5
-enseignant ; Igor ; Litovsky ; lito@polytech.unice.fr ; igor ; 6
-administrateur ; ARE ;   ;   ;   ; 7
-administrateur ;   ;   ;   ;   ; 7
-etudiant ; Amir ; Ben slimane ; maeaz ; zae ; 12
-etudiant ; null ; null ; 1234 ; 12 ; 3
-etudiant ; Mathieu ; Boutelier ; lykin06@gmail.com ; passe ; 15
-
-
+administrateur ; root ; root ; root@root.com ; root ; 1 ; 0
+etudiant ; Amir ; Ben Slimane ; benslima@unice.fr ; amir ; 2 ; 0
+etudiant ; Aurelien ; Colombet ; colombet@polytech.unice.fr ; aurelien ; 3 ; 0
+enseignant ; Anne-Marie ; Pinna-Dery ; pinna@polytech.unice.fr ; anne ; 4 ; 0
+enseignant ; Peter ; Sander ; sander@unice.fr ; peter ; 5 ; 0
+enseignant ; Igor ; Litovsky ; lito@polytech.unice.fr ; igor ; 6 ; 0
+administrateur ; ARE ;   ;   ;   ; 7 ; 0
+administrateur ;   ;   ;   ;   ; 7 ; 0
+etudiant ; Amir ; Ben slimane ; maeaz ; zae ; 12 ; 0
+etudiant ; null ; null ; 1234 ; 12 ; 3 ; 0
+etudiant ; Mathieu ; Boutelier ; lykin06@gmail.com ; passe ; 15 ; 0
 enseignant ; professeur ; tournesol ; 4321 ; 21 ; 21
-
-inconnu ; kha ; fall ; kha@hotmail.fr ; passe ; 1
+inconnu ; kha ; fall ; kha@hotmail.fr ; passe ; 1 ; 0

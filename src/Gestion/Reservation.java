@@ -30,7 +30,6 @@ public class Reservation implements Serializable {
 
 	@Override
 	public String toString() {
-	    // TODO revoir toString pour afficher si l'emprunt est accepte
 		String format = "dd/MM/yy";
 		SimpleDateFormat formater = new SimpleDateFormat(format);
 		StringBuilder str = new StringBuilder();

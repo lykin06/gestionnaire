@@ -35,7 +35,7 @@ public class Database {
     /**
      * List of user who are not confirmed by an administrator
      */
-    private ArrayList<Unknown> unknown;
+    private ArrayList<Personnel> unknown;
 
     /**
      * The current user
@@ -54,7 +54,7 @@ public class Database {
         this.administrators = new ArrayList<Personnel>();
         this.students = new ArrayList<Personnel>();
         this.teachers = new ArrayList<Personnel>();
-        this.unknown = new ArrayList<Unknown>();
+        this.unknown = new ArrayList<Personnel>();
         this.load();
     }
 
@@ -203,13 +203,31 @@ public class Database {
     public boolean searchList(ArrayList<Personnel> list, String email,
             String password) {
         for (int i = 0; i < list.size(); i++) {
-            this.setCurrentUser(list.get(i));
-            if (currentUser.getEmail().equals(email)
-                    && currentUser.getPassword().equals(password)) {
+            if (list.get(i).getEmail().equals(email)
+                    && list.get(i).getPassword().equals(password)) {
+                this.currentUser = list.get(i);
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * <b>Search an user in a list</b>
+     * 
+     * @param list
+     *            the list to search
+     * @param email
+     *            the user's email
+     * @return the user if he is in the list
+     */
+    public Personnel searchUser(ArrayList<Personnel> list, String email) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getEmail().equals(email)) {
+                return list.get(i);
+            }
+        }
+        return null;
     }
 
     /**
@@ -317,7 +335,7 @@ public class Database {
     /**
      * @return the unknown list
      */
-    public ArrayList<Unknown> getUnknown() {
+    public ArrayList<Personnel> getUnknown() {
         return unknown;
     }
 
@@ -325,7 +343,7 @@ public class Database {
      * @param unknown
      *            the unknown list to set
      */
-    public void setUnknown(ArrayList<Unknown> unknown) {
+    public void setUnknown(ArrayList<Personnel> unknown) {
         this.unknown = unknown;
     }
 
@@ -342,5 +360,48 @@ public class Database {
      */
     public void setCurrentUser(Personnel currentUser) {
         this.currentUser = currentUser;
+    }
+
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+
+        if (administrators.size() == 0) {
+            str.append("Aucun administrateur inscrit ! Allez savoir comment vous etes arrives la...");
+        } else {
+            str.append("Administrators:\n");
+            str.append(this.toStringList(administrators));
+        }
+
+        if (students.size() == 0) {
+            str.append("Aucun etudiant inscrit !");
+        } else {
+            str.append("Strudents:\n");
+            str.append(this.toStringList(students));
+        }
+
+        if (teachers.size() == 0) {
+            str.append("Aucun enseignant inscrit !");
+        } else {
+            str.append("Teachers:\n");
+            str.append(this.toStringList(teachers));
+        }
+
+        if (unknown.size() == 0) {
+            str.append("Ancun utilisateur a confirmer !");
+        } else {
+            str.append("Unknown:\n");
+            str.append(this.toStringList(unknown));
+        }
+        return str.toString();
+    }
+
+    public String toStringList(ArrayList<Personnel> list) {
+        StringBuilder str = new StringBuilder();
+
+        for (int i = 0; i < administrators.size(); ++i) {
+            str.append(administrators.get(i).toStringLong());
+            str.append('\n');
+        }
+        return str.toString();
     }
 }

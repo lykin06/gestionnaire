@@ -47,6 +47,14 @@ public class Reservation implements Serializable {
 		
 		return str.toString();
 	}
+	
+	public boolean equals(Material mat){
+		if (this.material.getQuantity()==mat.getQuantity()
+				&& this.material.getName().equals(mat.getName())
+				&& this.material.getDureeEmprunt()==mat.getDureeEmprunt())
+			return true;
+		else return false;			
+	}
 
 	/**
 	 * @return the material

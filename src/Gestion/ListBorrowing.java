@@ -72,11 +72,13 @@ int cpt=0;
 	return cpt;	
 }
 public String leplusEmprunte(){
-	Camera cam=null;Headphone head=null; Laptop lap=null; Phone phone=null; Tablet tab=null; WithOS os=null;String mat="camera";
+	String os="os";
+	Camera cam=new Camera() ;Headphone head=new Headphone(); Laptop lap=new Laptop(os); Phone phone=new Phone(os);
+	Tablet tab=new Tablet(os); WithOS o=new WithOS(os);String mat="camera";
 	int max=this.getNombreReserveOf(cam);
 	int nHeadphone =this.getNombreReserveOf(head);int nLaptop =this.getNombreReserveOf(lap);
 	int nPhone =this.getNombreReserveOf(phone);int nTablet =this.getNombreReserveOf(tab);
-	int nWithOS=this.getNombreReserveOf(os);
+	int nWithOS=this.getNombreReserveOf(o);
 	if( nHeadphone >max){
 		max=nHeadphone;
 		mat="headphone";

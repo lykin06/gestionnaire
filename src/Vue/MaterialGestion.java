@@ -27,7 +27,8 @@ public class MaterialGestion {
     private ListReservations listReservations;
 
     public MaterialGestion(Database database, Administrator administrator,
-            Manager manager, ListMaterial listMaterial, ListReservations listReservations) {
+            Manager manager, ListMaterial listMaterial,
+            ListReservations listReservations) {
         this.manager = manager;
         this.database = database;
         this.user = administrator;
@@ -68,7 +69,7 @@ public class MaterialGestion {
             this.removeMaterial();
             break;
         case 3:
-            this.displayMaterials();
+            this.displayMaterials(true);
             break;
         case 4:
             this.listMaterial.reinitialize();
@@ -95,7 +96,7 @@ public class MaterialGestion {
     private void addMaterial() {
         ArrayList<Material> materials = this.listMaterial.getMaterials();
 
-        this.displayMaterials();
+        this.displayMaterials(false);
         System.out
                 .println("Quel est le materiel que vous souhaitez ajouter au stock ?");
         int indice = this.manager.requestInt(1, materials.size()) - 1;
@@ -118,31 +119,37 @@ public class MaterialGestion {
      */
     private void removeMaterial() {
         ArrayList<Material> materials = this.listMaterial.getMaterials();
-        this.displayMaterials();
-        
+        this.displayMaterials(false);
+
         System.out
                 .println("Quel est le materiel que vous souhaitez retirer du stock ?");
         int indice = this.manager.requestInt(1, materials.size()) - 1;
         Material material = materials.get(indice);
         
+        if (material.isEmpty()) {
+            System.out.println("Aucun materiel à enlever.");
+            return;
+        }
+
         StringBuilder str = new StringBuilder();
         str.append("Combien de ");
-        str.append(material.toString());
+        str.append(material.getName());
+        str.append(" voulez-vous enlever ? (il en reste ");
+        str.append(material.getQuantity());
+        str.append(')');
+        System.out.println(str.toString());
 
-        System.out.println("Combien ? Il en reste "
-                + materials.get(indice).getQuantity() + ".");
-        int n = manager.requestInt(0, materials.get(indice).getQuantity());
+        int n = manager.requestInt(0, material.getQuantity());
+
         materials.get(indice).setQuantity(
                 materials.get(indice).getQuantity() - n);
-
-        this.listMaterial.store();
+        this.listMaterial.setMaterials(materials);
     }
-    
+
     /**
-     * 
-     * Method which show all the Materials in the stock.
+     * <b>Show the material in the stock</b>
      */
-    private void displayMaterials() {
+    private void displayMaterials(boolean withResa) {
         ArrayList<Material> materials = this.listMaterial.getMaterials();
 
         System.out.println("Le stock contient :");
@@ -150,11 +157,14 @@ public class MaterialGestion {
             System.out.println(materials.get(i).toString() + " ["
                     + materials.get(i).getQuantity() + "]");
         }
-        System.out.println("Liste des reservations acceptes :\n");
-        this.displayReservationsAccepted();
+
+        if (withResa) {
+            System.out.println("Liste des reservations acceptes :\n");
+            this.displayReservationsAccepted();
+        }
 
     }
-    
+
     private void displayReservationsAccepted() {
         ArrayList<Reservation> res = this.listReservations.getReservations();
         for (int i = 0; i < res.size(); i++) {

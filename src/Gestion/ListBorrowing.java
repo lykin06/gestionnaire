@@ -63,17 +63,14 @@ public class ListBorrowing {
 
     public int getNombreReserveOf(Material material) {
         int cpt = 0;
-        for (int i = 0; i < listBorrowing.size(); i++)
-
-        { // ArrayList<Reservation> res=
-          // this.getReservationsOf(listBorrowing.get(i).getBorrower());
-          // for(int j=0; j<res.size();j++)
-            if (listBorrowing.get(i).getClass().equals(material)) // TODO mettre
-                                                                  // un
-                                                                  // instanceOf
-                                                                  // au lieu de
-                                                                  // equals.
-                cpt++;
+        for (int i = 0; i < listBorrowing.size(); i++){
+        	Reservation m = (this.listBorrowing.get(i));
+        	//System.out.println(m.getMaterial().getClass().getSimpleName()+"\n");
+        	//System.out.println(material.getClass().getCanonicalName());
+            if ((m.getMaterial().getClass().getSimpleName()).equals(material.getClass().getSimpleName())){	
+            	cpt++;
+                //System.out.println("coucou");
+            }
 
         }
         return cpt;
@@ -90,31 +87,49 @@ public class ListBorrowing {
         int nLaptop = this.getNombreReserveOf(lap);
         int nPhone = this.getNombreReserveOf(phone);
         int nTablet = this.getNombreReserveOf(tab);
+        //System.out.println("nHeadphone :"+nHeadphone+" nLaptop :"+nLaptop+" nPhone :"+nPhone+"  nTablet :"+nTablet);
 
         String mat = "camera";
         int max = this.getNombreReserveOf(cam);       
         if (nHeadphone > max) {
             max = nHeadphone;
-            mat = "headphone";
+            if(nHeadphone==max){
+            	mat=mat+" & casque";
+            }
+            else{
+            	mat = "casque";
+            }
         }
         if (nPhone > max) {
             max = nPhone;
-            mat = "phone";
+            if(nPhone==max){
+            	mat=mat+" & casque";
+            }
+            else{
+            	mat = "casque";
+            }
         }
         if (nLaptop > max) {
             max = nLaptop;
-            mat = "laptop";
-        }
+            if(nLaptop==max){
+            	mat=mat+" & Ordinateurs portables";
+            }
+            else{
+            	mat = "Ordinateurs portables";
+            }        }
         if (nTablet > max) {
             max = nTablet;
-            mat = "tablette";
+            if(nTablet==max){
+            	mat=mat+" & Tablettes";
+            }
+            else{
+            	mat = "Tablettes";
+            }   
         }
         if (max == 0) {
             mat = "Null";
         }
 
-        // for(int i =0 ; i<this.listBorrowing.size(); i++){
-        // if(listBorrowing.getMaterial().equals(Camera))
         return mat;
 
     }

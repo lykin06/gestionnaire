@@ -19,9 +19,18 @@ public class Borrower extends Personnel {
 				&& this.getFirstName().equals(borrower.getFirstName())
 				&& this.getIdentifiant() == borrower.getIdentifiant()
 				&& this.getName().equals(borrower.getName())
-				&& this.getPassword().equals(borrower.getPassword())) {
+				&& this.getPassword().equals(borrower.getPassword())
+				&& this.cpt == borrower.getCompteur()) {
 			return true;
 		}
 		return false;
+	}
+	
+	public int getCompteur(){
+		return this.cpt;
+	}
+	public void setCompteur(int compteur){
+		this.cpt=compteur;
+		
 	}
 }

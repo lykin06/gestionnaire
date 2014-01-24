@@ -86,13 +86,13 @@ public class ListBorrowing {
         Laptop lap = new Laptop(os);
         Phone phone = new Phone(os);
         Tablet tab = new Tablet(os);
-        String mat = "camera";
-        int max = this.getNombreReserveOf(cam);
         int nHeadphone = this.getNombreReserveOf(head);
         int nLaptop = this.getNombreReserveOf(lap);
         int nPhone = this.getNombreReserveOf(phone);
         int nTablet = this.getNombreReserveOf(tab);
-        int nWithOS = nLaptop + nPhone + nTablet;
+
+        String mat = "camera";
+        int max = this.getNombreReserveOf(cam);       
         if (nHeadphone > max) {
             max = nHeadphone;
             mat = "headphone";
@@ -105,9 +105,9 @@ public class ListBorrowing {
             max = nLaptop;
             mat = "laptop";
         }
-        if (nWithOS > max) {
-            max = nWithOS;
-            mat = "withOS";
+        if (nTablet > max) {
+            max = nTablet;
+            mat = "tablette";
         }
         if (max == 0) {
             mat = "Null";

@@ -64,7 +64,7 @@ public class MaterialGestion {
         System.out.println("1. Ajouter un materiel.");
         System.out.println("2. Supprimer un materiel.");
         System.out.println("3. Envoyer du materiel en reparation.");
-        System.out.println("4. Reccuperer le materiel repare.");
+        System.out.println("4. Recuperer le materiel repare.");
         System.out.println("5. Afficher la liste des materiels");
         System.out
                 .println("6. Reinitialiser le stock de materiel (!Attention cela va Reinitialiser les reservations)");
@@ -147,7 +147,7 @@ public class MaterialGestion {
         Material material = materials.get(indice);
 
         if (material.isEmpty()) {
-            System.out.println("Aucun materiel à enlever.");
+            System.out.println("Aucun materiel a enlever.");
             return;
         }
 
@@ -207,25 +207,29 @@ public class MaterialGestion {
     private void addReparation() {
         ArrayList<Material> materials = this.listMaterial.getMaterials();
         System.out.println(this.displayMaterials(false));
-        System.out.println("Quel materiel faut-il envoyer en reparation ?");
+        System.out.println("Quel materiel faut-il envoyer en reparation ? (0 pour quitter)");
 
-        int indice = this.manager.requestInt(1, materials.size()) - 1;
-        Material material = materials.get(indice);
-
-        if (material.isEmpty()) {
-            System.out.println("Aucun materiel à enlever.");
-            return;
+        int indice = this.manager.requestInt(0, materials.size()) - 1;
+        if(!(indice==-1)){
+	        Material material = materials.get(indice);
+	
+	        if (material.isEmpty()) {
+	            System.out.println("Aucun materiel a enlever.");
+	            return;
+	        }
+	
+	        int max = material.getQuantity();
+	        System.out
+	                .println("Combien de materiel voulez-vous envoyer en reparation ? (maximum "
+	                        + max + ") (-1 pour quitter)");
+	        int quantity = manager.requestInt(-1, max);
+	        
+	        if(!(quantity==-1)){
+		        listReparations.add(new Reparation(material, quantity));
+		        listMaterial.getMaterials().get(indice).setQuantity(max - quantity);
+		        listMaterial.store();
+	        }
         }
-
-        int max = material.getQuantity();
-        System.out
-                .println("Combien de matriel voulez-vous envoyer en reparation ? (maximum "
-                        + max + ")");
-        int quantity = manager.requestInt(0, max);
-
-        listReparations.add(new Reparation(material, quantity));
-        listMaterial.getMaterials().get(indice).setQuantity(max - quantity);
-        listMaterial.store();
     }
 
     /**

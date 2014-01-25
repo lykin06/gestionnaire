@@ -94,43 +94,46 @@ public class AdminMenu {
         this.adminInterface();
     }
     
+    /**
+     * <b>Valid the reservations</b>
+     * <p>
+     * This method travels the list of reservation. When it encounters a non
+     * accepted reservation it proposes to accept it or remove it.
+     * </p>
+     */
     private void managementLoan() {
-        ArrayList<Reservation> res = this.listReservations.getReservations();
-        boolean isaccepted=false;
-        for (int j = 0; j < res.size(); j++) {
-            if (!res.get(j).isAccepted()) {
-                isaccepted=true;
-                break;
-            }
-        }
-        if (isaccepted==false) {
-            System.out.println("Aucune demande de pret.");
-        } else {
-            for (int i = 0; i < res.size(); i++) {
-                if (!res.get(i).isAccepted()) {
-                    System.out.println((i) + " - " + res.get(i).toString());
+        ArrayList<Reservation> reservations = this.listReservations
+                .getReservations();
+        boolean isaccepted = false;
+
+        StringBuilder str = new StringBuilder();
+        str.append("Voulez-vous valider cette reservation ?\n");
+        str.append("1.\tOui\n");
+        str.append("2.\tNon\n");
+        str.append("3.\tAnnuler");
+
+        for (int j = 0; j < reservations.size(); ++j) {
+            if (!reservations.get(j).isAccepted()) {
+                isaccepted = true;
+                System.out.println(reservations.get(j).toString());
+                System.out.println(str.toString());
+
+                int indice = this.manager.requestInt(1, 3);
+                switch (indice) {
+                case 1:
+                    this.listReservations.authorize(reservations.get(j));
+                    break;
+                case 2:
+                    this.listReservations.remove(reservations.get(j));
+                    break;
+                default:
+                    return;
                 }
             }
-
-            System.out.println("Quel demande de reservation autoriser ? (-1 pour quitter)");
-
-            int indice = this.manager.requestInt(-1, res.size() - 1);
-            if(indice!=-1){
-	            while(res.get(indice).isAccepted()){
-	            	System.out.println("Mauvaise entree veuillez resaisir votre demande svp.");
-	            	indice = this.manager.requestInt(-1, res.size() - 1);
-	            	if(indice==-1){
-	            		break;
-	            	}
-	            }
-	            
-	            if(indice!=-1){
-		            this.listReservations.authorize(this.listReservations
-		                    .getReservations().get(indice));
-		            this.listReservations.store();
-	            }
-            }
-
+        }
+        if (isaccepted == false) {
+            System.out.println("Aucune demande de pret.");
+            return;
         }
     }
 

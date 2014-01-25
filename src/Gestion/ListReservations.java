@@ -67,6 +67,17 @@ public class ListReservations {
     public ArrayList<Reservation> getReservations() {
         return reservations;
     }
+    
+    public ArrayList<Reservation> getAcceptedReservation() {
+        ArrayList<Reservation> accepted = new ArrayList<Reservation>();
+        for (int i = 0; i < reservations.size(); ++i) {
+            if(reservations.get(i).isAccepted()) {
+                accepted.add(reservations.get(i));
+            }
+        }
+        
+        return accepted;
+    }
 
     /**
      * @param reservations

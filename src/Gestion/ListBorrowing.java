@@ -19,18 +19,24 @@ public class ListBorrowing {
 
     private ListReservations listReservations;
 
+    /**
+     * List of accepted reservations
+     */
     private ArrayList<Reservation> listBorrowing = new ArrayList<Reservation>();
 
+    /**
+     * <b>Constructor</b>
+     * <p>
+     * Get all the accepted reservations from the reservations list in
+     * listReservations.
+     * </p>
+     * 
+     * @param listReservations
+     */
     public ListBorrowing(ListReservations listReservations) {
         this.listReservations = listReservations;
         if (this.listReservations.getReservations() != null) {
-
-            for (int i = 0; i < listReservations.getReservations().size(); ++i) {
-                if (!listReservations.getReservations().get(i).isAccepted())
-                    listBorrowing
-                            .add(listReservations.getReservations().get(i));
-
-            }
+            listBorrowing = this.listReservations.getAcceptedReservation();
         }
     }
 
@@ -42,24 +48,31 @@ public class ListBorrowing {
         return listBorrowing.get(i);
     }
 
+    /**
+     * <b>Return the number of accepted reservations of thisUser</b>
+     * 
+     * @param thisUser
+     * @return the number of accepted reservations of thisUser
+     */
     public int getNombreReservationsOf(Borrower thisUser) {
-        ArrayList<Reservation> res = new ArrayList<Reservation>();
-        for (int j = 0; j < this.listBorrowing.size(); j++) {
-            if (this.listBorrowing.get(j).getBorrower().equals(thisUser)) {
-                res.add(this.listBorrowing.get(j));
-            }
-        }
-        return res.size();
+        return this.getReservationsOf(thisUser).size();
     }
 
+    /**
+     * <b>Return the list of accepted reservations of thisUser</b>
+     * 
+     * @param thisUser
+     * @return the list of accepted reservations of thisUser
+     */
     public ArrayList<Reservation> getReservationsOf(Borrower thisUser) {
-        ArrayList<Reservation> res = new ArrayList<Reservation>();
-        for (int j = 0; j < this.listBorrowing.size(); j++) {
+        ArrayList<Reservation> reservations = new ArrayList<Reservation>();
+        
+        for (int j = 0; j < this.listBorrowing.size(); ++j) {
             if (this.listBorrowing.get(j).getBorrower().equals(thisUser)) {
-                res.add(this.listBorrowing.get(j));
+                reservations.add(this.listBorrowing.get(j));
             }
         }
-        return res;
+        return reservations;
     }
 
     public int getNombreReserveOf(Material material) {

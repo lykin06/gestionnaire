@@ -66,7 +66,7 @@ public class ListBorrowing {
      */
     public ArrayList<Reservation> getReservationsOf(Borrower thisUser) {
         ArrayList<Reservation> reservations = new ArrayList<Reservation>();
-        
+
         for (int j = 0; j < this.listBorrowing.size(); ++j) {
             if (this.listBorrowing.get(j).getBorrower().equals(thisUser)) {
                 reservations.add(this.listBorrowing.get(j));
@@ -75,19 +75,30 @@ public class ListBorrowing {
         return reservations;
     }
 
+    /**
+     * <b>Return the number of material lent</b>
+     * 
+     * @param material
+     * @return the number of material lent
+     */
     public int getNombreReserveOf(Material material) {
         int cpt = 0;
-        for (int i = 0; i < listBorrowing.size(); i++) {
-            Reservation m = (this.listBorrowing.get(i));
-            if ((m.getMaterial().getClass().getSimpleName()).equals(material
+
+        for (int i = 0; i < listBorrowing.size(); ++i) {
+            Reservation reservation = this.listBorrowing.get(i);
+            if ((reservation.getMaterial().getClass().getSimpleName()).equals(material
                     .getClass().getSimpleName())) {
-                cpt++;
+                ++cpt;
             }
 
         }
         return cpt;
     }
-
+    
+    /**
+     * <b>Computes the most borrowed material</b>
+     * @return
+     */
     public String leplusEmprunte() {
         String os = "os";
         Camera cam = new Camera();
@@ -101,54 +112,60 @@ public class ListBorrowing {
         int nTablet = this.getNombreReserveOf(tab);
         int nCamera = this.getNombreReserveOf(cam);
 
-        String mat = "";
+        String mat = new String();
         int first = 0;
-        int max = this.getNombreReserveOf(cam);
-        if (nHeadphone > max) {
-            max = nHeadphone;
+        int max = 0;
+        
+        if (nCamera >= max) {
+            if (nCamera == max && first != 0) {
+                mat = mat + " & Camera";
+            } else {
+                max = nCamera;
+                mat = "Camera";
+                ++first;
+            }
+        }
+        
+        if (nHeadphone >= max) {
             if (nHeadphone == max && first != 0) {
                 mat = mat + " & casque";
             } else {
+                max = nHeadphone;
                 mat = "casque";
-                first++;
+                ++first;
             }
         }
+        
         if (nPhone >= max) {
-            max = nPhone;
             if (nPhone == max && first != 0) {
-                mat = mat + " & casque";
+                mat = mat + " & Telephones";
             } else {
-                mat = "casque";
-                first++;
+                max = nPhone;
+                mat = "Telephones";
+                ++first;
             }
         }
+        
         if (nLaptop >= max) {
-            max = nLaptop;
             if (nLaptop == max && first != 0) {
                 mat = mat + " & Ordinateurs portables";
             } else {
+                max = nLaptop;
                 mat = "Ordinateurs portables";
-                first++;
+                ++first;
             }
         }
+        
         if (nTablet >= max) {
-            max = nTablet;
             if (nTablet == max && first != 0) {
                 mat = mat + " & Tablettes";
-                first++;
             } else {
+                max = nTablet;
                 mat = "Tablettes";
+                ++first;
             }
         }
-        if (nCamera >= max) {
-            max = nCamera;
-            if (nTablet == max && first != 0) {
-                mat = mat + " & Camera";
-            } else {
-                mat = "Camera";
-                first++;
-            }
-        }
+
         if (max == 0) {
             mat = "Null";
         }

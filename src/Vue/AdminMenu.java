@@ -159,18 +159,23 @@ public class AdminMenu {
     }
 
     public void emprunteur() {
-        Borrower b = listBorrowing.getReservation(0).getBorrower();
-        int max = this.listBorrowing.getNombreReservationsOf(b);
-        for (int i = 1; i < this.listBorrowing.getListBorrowing().size(); i++) {
-            Borrower borrower = listBorrowing.getReservation(i).getBorrower();
-            if (listBorrowing.getNombreReservationsOf(borrower) > max) {
-                b = this.listBorrowing.getReservation(i).getBorrower();
-                max = listBorrowing.getNombreReservationsOf(b);
-            }
-
-        }
-        System.out.println("Actuellement le plus gros emprunteur est: "
-                + b.toString());
+    	if(listBorrowing.getListBorrowing().isEmpty()){
+    		System.out.println("Aucune reservations impossible de savoir le plus gros emprunteur.");
+    	}
+    	else{
+	        Borrower b = listBorrowing.getReservation(0).getBorrower();
+	        int max = this.listBorrowing.getNombreReservationsOf(b);
+	        for (int i = 1; i < this.listBorrowing.getListBorrowing().size(); i++) {
+	            Borrower borrower = listBorrowing.getReservation(i).getBorrower();
+	            if (listBorrowing.getNombreReservationsOf(borrower) > max) {
+	                b = this.listBorrowing.getReservation(i).getBorrower();
+	                max = listBorrowing.getNombreReservationsOf(b);
+	            }
+	
+	        }
+	        System.out.println("Actuellement le plus gros emprunteur est: "
+	                + b.getFirstName()+" "+b.getName());
+    	}
     }
 
     /**

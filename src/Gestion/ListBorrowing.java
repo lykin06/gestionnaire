@@ -169,7 +169,7 @@ public class ListBorrowing {
 							.getBorrower();
 							
 	}
-=======
+
     private ListReservations listReservations;
 
     private ArrayList<Reservation> listBorrowing = new ArrayList<Reservation>();

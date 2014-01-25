@@ -141,5 +141,29 @@ public class ListBorrowing {
 		return mat;
 
 	}
-
+	public Borrower  emprunteur(){
+		int max = this.listBorrowing
+				.get(0)
+				.getBorrower()
+				.getCompteur();
+				int i=1, indiceMax=0;
+		while(i<this.listBorrowing.size()){
+			int j=this.listBorrowing
+					.get(i)
+					.getBorrower()
+					.getCompteur();
+			
+			if (j !=0 || j<max )
+			{i++;
+			
+			}
+			
+			else {
+				max=j;indiceMax=i;i++;
+			}
+		}
+		return listBorrowing.get(indiceMax)
+							.getBorrower();
+							
+	}
 }

@@ -52,7 +52,7 @@ public class AdminMenu {
         if (this.listReservations == null) {
             this.listReservations.reinitialize();
         }
-        this.listBorrowing = new ListBorrowing();
+        this.listBorrowing = new ListBorrowing(this.listReservations);
         this.user = user;
         adminInterface();
     }

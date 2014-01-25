@@ -137,7 +137,8 @@ public class AdminMenu {
     private void statistiques() {
         System.out.println("1: le materiel le plus emprunte");
         System.out.println("2: le plus gros emprunteurs ");
-        int rep = this.manager.requestInt(1, 2);
+        System.out.println("3: l'emprunteur qui ne respecte pas les delais");
+        int rep = this.manager.requestInt(1, 3);
         switch (rep) {
         case 1:
             String leplusemprunte = this.listBorrowing.leplusEmprunte();

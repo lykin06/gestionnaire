@@ -79,7 +79,8 @@ public class AdminMenu {
             new UserGestion(database, user, manager);
             return;
         case 3:
-            new MaterialGestion(database, user, manager, listMaterial, listReservations);
+            new MaterialGestion(database, user, manager, listMaterial,
+                    listReservations);
             return;
         case 4:
             this.statistiques();
@@ -93,7 +94,7 @@ public class AdminMenu {
 
         this.adminInterface();
     }
-    
+
     /**
      * <b>Valid the reservations</b>
      * <p>
@@ -141,11 +142,13 @@ public class AdminMenu {
         System.out.println("1: le materiel le plus emprunte");
         System.out.println("2: le plus gros emprunteurs ");
         System.out.println("3: l'emprunteur qui ne respecte pas les delais");
-        int rep = this.manager.requestInt(1, 3);
+        System.out.println("4: Annuler");
+
+        int rep = this.manager.requestInt(1, 4);
         switch (rep) {
         case 1:
             String leplusemprunte = this.listBorrowing.leplusEmprunte();
-            if (leplusemprunte.equals("Null")) {
+            if (leplusemprunte == null) {
                 System.out
                         .println("Aucun emprunts en cours. Impossible de savoir quel materiel est le plus emprunte");
             } else {
@@ -153,36 +156,16 @@ public class AdminMenu {
                         .println("le material le plus emprunte est actuellement: "
                                 + leplusemprunte);
             }
-            break;
+            return;
         case 2:
-            this.emprunteur();
-            break;
+            System.out.println(this.listBorrowing.plusGrosEmprunteur());
+            return;
         case 3:
-        	this.listBorrowing.emprunteur();
-            break;
+            System.out.println(this.listBorrowing.plusGrosRetard());
+            return;
         default:
-            break;
+            return;
         }
-    }
-
-    public void emprunteur() {
-    	if(listBorrowing.getListBorrowing().isEmpty()){
-    		System.out.println("Aucune reservations impossible de savoir le plus gros emprunteur.");
-    	}
-    	else{
-	        Borrower b = listBorrowing.getReservation(0).getBorrower();
-	        int max = this.listBorrowing.getNombreReservationsOf(b);
-	        for (int i = 1; i < this.listBorrowing.getListBorrowing().size(); i++) {
-	            Borrower borrower = listBorrowing.getReservation(i).getBorrower();
-	            if (listBorrowing.getNombreReservationsOf(borrower) > max) {
-	                b = this.listBorrowing.getReservation(i).getBorrower();
-	                max = listBorrowing.getNombreReservationsOf(b);
-	            }
-	
-	        }
-	        System.out.println("Actuellement le plus gros emprunteur est: "
-	                + b.getFirstName()+" "+b.getName());
-    	}
     }
 
     /**

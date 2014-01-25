@@ -86,17 +86,18 @@ public class ListBorrowing {
 
         for (int i = 0; i < listBorrowing.size(); ++i) {
             Reservation reservation = this.listBorrowing.get(i);
-            if ((reservation.getMaterial().getClass().getSimpleName()).equals(material
-                    .getClass().getSimpleName())) {
+            if ((reservation.getMaterial().getClass().getSimpleName())
+                    .equals(material.getClass().getSimpleName())) {
                 ++cpt;
             }
 
         }
         return cpt;
     }
-    
+
     /**
      * <b>Computes the most borrowed material</b>
+     * 
      * @return
      */
     public String leplusEmprunte() {
@@ -115,7 +116,7 @@ public class ListBorrowing {
         String mat = new String();
         int first = 0;
         int max = 0;
-        
+
         if (nCamera >= max) {
             if (nCamera == max && first != 0) {
                 mat = mat + " & Camera";
@@ -125,7 +126,7 @@ public class ListBorrowing {
                 ++first;
             }
         }
-        
+
         if (nHeadphone >= max) {
             if (nHeadphone == max && first != 0) {
                 mat = mat + " & casque";
@@ -135,7 +136,7 @@ public class ListBorrowing {
                 ++first;
             }
         }
-        
+
         if (nPhone >= max) {
             if (nPhone == max && first != 0) {
                 mat = mat + " & Telephones";
@@ -145,7 +146,7 @@ public class ListBorrowing {
                 ++first;
             }
         }
-        
+
         if (nLaptop >= max) {
             if (nLaptop == max && first != 0) {
                 mat = mat + " & Ordinateurs portables";
@@ -155,7 +156,7 @@ public class ListBorrowing {
                 ++first;
             }
         }
-        
+
         if (nTablet >= max) {
             if (nTablet == max && first != 0) {
                 mat = mat + " & Tablettes";
@@ -167,31 +168,57 @@ public class ListBorrowing {
         }
 
         if (max == 0) {
-            mat = "Null";
+            mat = null;
         }
 
         return mat;
 
     }
 
-    public Borrower emprunteur() {
-        int max = this.listBorrowing.get(0).getBorrower().getCompteur();
-        int i = 1, indiceMax = 0;
-        while (i < this.listBorrowing.size()) {
-            int j = this.listBorrowing.get(i).getBorrower().getCompteur();
-
-            if (j != 0 || j < max) {
-                i++;
-
-            }
-
-            else {
-                max = j;
-                indiceMax = i;
-                i++;
-            }
+    /**
+     * @return the borrower with the highest number of reservations accepted
+     */
+    public String plusGrosEmprunteur() {
+        if (this.listBorrowing.isEmpty()) {
+            return "Aucune reservations acceptees, impossible de savoir le plus gros emprunteur.";
         }
-        return listBorrowing.get(indiceMax).getBorrower();
+        Borrower b = listBorrowing.get(0).getBorrower();
+        int max = this.getNombreReservationsOf(b);
+
+        for (int i = 1; i < this.listBorrowing.size(); ++i) {
+            Borrower borrower = listBorrowing.get(i).getBorrower();
+            if (this.getNombreReservationsOf(borrower) > max) {
+                b = this.listBorrowing.get(i).getBorrower();
+                max = this.getNombreReservationsOf(b);
+            }
+
+        }
+        return ("Actuellement le plus gros emprunteur est: " + b.getFirstName()
+                + " " + b.getName());
+
+    }
+
+    public String plusGrosRetard() {
+        if (this.listBorrowing.isEmpty()) {
+            return "Aucune reservations acceptees, impossible de savoir le plus gros emprunteur.";
+        }
+        Borrower b = listBorrowing.get(0).getBorrower();
+        int max = b.getCompteur();
+
+        for (int i = 1; i < this.listBorrowing.size(); ++i) {
+            Borrower borrower = listBorrowing.get(i).getBorrower();
+            if (borrower.getCompteur() > max) {
+                b = this.listBorrowing.get(i).getBorrower();
+                max = b.getCompteur();
+            }
+
+        }
+        if (max == 0) {
+            return "Aucun emprunteur n'a de retards";
+        }
+        
+        return ("Actuellement l'emprunteur avec le plus de retard est: " + b.getFirstName()
+                + " " + b.getName());
 
     }
 }

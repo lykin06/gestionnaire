@@ -17,7 +17,7 @@ import Personnel.Borrower;
  */
 public class ListBorrowing {
 
-<<<<<<< HEAD
+
 	private ListReservations listReservations;
 
 	private ArrayList<Reservation> listBorrowing = new ArrayList<Reservation>();

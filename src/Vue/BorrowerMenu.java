@@ -83,27 +83,25 @@ public class BorrowerMenu {
                     .println("Quel materiel voulez-vous rendre ? (pour annuler: "
                             + (reservations.size() + 1) + ")");
             int indice = this.manager.requestInt(1, reservations.size() + 1) - 1;
-            if (indice == reservations.size() ) {
+            if (indice == reservations.size()) {
                 return;
+            } else {
+                Reservation reservationDelete = reservations.get(indice);
+
+                reservations
+                        .get(indice)
+                        .getMaterial()
+                        .setQuantity(
+                                reservations.get(indice).getMaterial()
+                                        .getQuantity() + 1);
+                if (reservationDelete.getFinish().before(today)) {
+                    Borrower b = (Borrower) this.database.getCurrentUser();
+                    b.setCompteur(b.getCompteur() + 1);
+                }
+                reservations.remove(indice);
+                this.listReservations.remove(reservationDelete);
+
             }
-            else {
-            	Reservation reservationDelete = reservations.get(indice);
-            
-            reservations
-                    .get(indice)
-                    .getMaterial()
-                    .setQuantity(
-                            reservations.get(indice).getMaterial()
-                                    .getQuantity() + 1);
-            if (reservationDelete.getFinish().before(today)){
-            	Borrower b=(Borrower) this.database.getCurrentUser();
-            	b.setCompteur(b.getCompteur()+1);
-            }
-            reservations.remove(indice);
-            this.listReservations.remove(reservationDelete);
-           
-            
-        }
         }
     }
 
@@ -112,7 +110,7 @@ public class BorrowerMenu {
      */
     @SuppressWarnings("deprecation")
     private void borrow() {
-        System.out.println("Que voulez vous emprunter ?");
+        System.out.println("Que voulez vous emprunter ? (0 pour quitter)");
         Personnel user = database.getCurrentUser();
 
         // Display the material list available
@@ -120,10 +118,18 @@ public class BorrowerMenu {
                 .avaibleMaterials(user instanceof Student));
 
         // Select the material and watch if it is available
-        int indice = manager.requestInt(1, listMaterial.getMaterials().size()) - 1;
+        int indice = manager.requestInt(0, listMaterial.getMaterials().size()) - 1;
+        if (indice < 0) {
+            return;
+        }
+
         Material material = listMaterial.getMaterials().get(indice);
         while (listMaterial.isNotAvailable(user instanceof Student, material)) {
-            indice = manager.requestInt(1, listMaterial.getMaterials().size()) - 1;
+            indice = manager.requestInt(0, listMaterial.getMaterials().size()) - 1;
+            if (indice < 0) {
+                return;
+            }
+
             material = listMaterial.getMaterials().get(indice);
         }
 
@@ -191,8 +197,7 @@ public class BorrowerMenu {
      */
     private void displaysReservations() {
         ArrayList<Reservation> reservations = this.listReservations
-                .getReservationsOf(
-                        (Borrower) this.database.getCurrentUser());
+                .getReservationsOf((Borrower) this.database.getCurrentUser());
         if (reservations.isEmpty()) {
             System.out
                     .println("Vous n'avez pas emprunte de materiel (menu 2 pour emprunter).");

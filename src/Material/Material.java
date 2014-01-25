@@ -9,7 +9,9 @@ import java.io.Serializable;
  * 
  */
 public class Material implements Serializable {
-    private int dureeEmprunt;
+
+	private static final long serialVersionUID = -1339053100951169528L;
+	private int dureeEmprunt;
     private int quantity;
     private String name;
 

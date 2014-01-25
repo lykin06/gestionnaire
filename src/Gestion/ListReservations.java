@@ -29,8 +29,8 @@ public class ListReservations {
      * 
      * @see Data#load(String)
      */
-    public ListReservations() {
-        // TODO voir si on peut enlever ce warning
+    @SuppressWarnings("unchecked")
+	public ListReservations() {
         this.reservations = (ArrayList<Reservation>) Data.load("reservation");
     }
 

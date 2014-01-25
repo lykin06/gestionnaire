@@ -21,7 +21,10 @@ import Material.WithOS;
  * 
  */
 public class Reparation implements Serializable {
-    /**
+
+	private static final long serialVersionUID = -7148847267441888226L;
+
+	/**
      * Type of material to send in reparation
      */
     private Material material;

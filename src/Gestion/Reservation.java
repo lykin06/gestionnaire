@@ -14,6 +14,8 @@ import Personnel.Borrower;
  * 
  */
 public class Reservation implements Serializable {
+
+	private static final long serialVersionUID = -4466367633419131483L;
 	private Borrower borrower;
 	private Material material;
 	private Date start;

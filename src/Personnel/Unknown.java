@@ -15,7 +15,7 @@ public class Unknown extends Personnel {
     /**
      * user's type (can be Administrator, Student or Teacher)
      */
-    private String type;
+    private String type;			//TODO virer le Warning
     
     public Unknown(String type, String firstName, String name, String email,
             String password, int identifiant) {

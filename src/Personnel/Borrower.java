@@ -7,7 +7,9 @@ package Personnel;
  * 
  */
 public class Borrower extends Personnel {
-    private int delay;
+
+	private static final long serialVersionUID = 6406407122573806023L;
+	private int delay;
 
     public Borrower(String firstName, String name, String email,
             String password, int identifiant, int delay) {

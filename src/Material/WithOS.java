@@ -7,6 +7,8 @@ package Material;
  * 
  */
 public class WithOS extends Material {
+
+	private static final long serialVersionUID = -7136737206906137215L;
 	private String os;
 
 	public WithOS(String os, String name, int dureeEmprunt, int quantity) {

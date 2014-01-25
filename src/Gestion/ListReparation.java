@@ -28,7 +28,8 @@ public class ListReparation {
      * 
      * @see Data#load(String)
      */
-    public ListReparation() {
+    @SuppressWarnings("unchecked")
+	public ListReparation() {
         this.reparations = (ArrayList<Reparation>) Data.load("reparation");
     }
 

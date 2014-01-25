@@ -10,7 +10,10 @@ import Config.Config;
  */
 public class Camera extends Material {
 
-    public Camera() {
+
+	private static final long serialVersionUID = 9010826948871546644L;
+
+	public Camera() {
 		super("camera", Config.DUREE_EMPRUNT_CAMERA, Config.QUANTITE_INITIAL_CAMERA);
 	}
 }

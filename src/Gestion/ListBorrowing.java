@@ -296,6 +296,34 @@ public class ListBorrowing {
         return mat;
 
     }
+    public Borrower emprunteur(){
+    	int max = this.listBorrowing
+    			.get(0)
+    			.getBorrower()
+    			.getCompteur();
+    			int i=1, indiceMax=0;
+    	while(i<this.listBorrowing.size()){
+    		int j=this.listBorrowing
+    				.get(i)
+    				.getBorrower()
+    				.getCompteur();
+    		
+    		if (j !=0 || j<max )
+    		{i++;
+    		
+    		}
+    		
+    		else {
+    			max=j;indiceMax=i;i++;
+    		}
+    	}
+    	if(indiceMax==0 && max==0)
+    		System.out.println("Tous les emprunteurs ont su repecter les delais");
+    	else
+    	System.out.println("Actuellement celui qui a tendance à ne pas respecter les delais est: "+ this.listBorrowing.get(indiceMax)
+    						.getBorrower().getFirstName()+""+this.listBorrowing.get(indiceMax).getBorrower().getName());
+    						
+    }
 
->>>>>>> 048c071cc7fb2320906a52d7ca493f82a2376edd
+
 }

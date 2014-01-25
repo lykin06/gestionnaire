@@ -58,7 +58,7 @@ public class ListReservations {
                 break;
             }
         }
-        Data.store(this.reservations, "reservation");
+        this.store();
     }
 
     /**
@@ -68,6 +68,9 @@ public class ListReservations {
         return reservations;
     }
     
+    /**
+     * @return the list of accepted reservations
+     */
     public ArrayList<Reservation> getAcceptedReservation() {
         ArrayList<Reservation> accepted = new ArrayList<Reservation>();
         for (int i = 0; i < reservations.size(); ++i) {
@@ -111,11 +114,12 @@ public class ListReservations {
      * @param reservation to authorize
      */
     public void authorize(Reservation reservation) {
-        for (int i = 0; i < this.reservations.size(); i++) {
+        for (int i = 0; i < this.reservations.size(); ++i) {
             if (this.reservations.get(i).equals(reservation)) {
                 this.reservations.get(i).setAccepted(true);
             }
         }
+        this.store();
     }
 
     /**
@@ -123,11 +127,25 @@ public class ListReservations {
      */
     public void reinitialize() {
         this.reservations = new ArrayList<Reservation>();
-        Data.store(this.reservations, "reservation");
+        this.store();
     }
     
     public void store() {
         Data.store(this.reservations, "reservation");
     }
 
+    /**
+     * <b>Show the material in reservation</b>
+     */
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+
+        for (int i = 0; i < reservations.size(); i++) {
+            str.append(i);
+            str.append(" - ");
+            str.append(reservations.get(i).toString());
+            str.append('\n');
+        }
+        return str.toString();
+    }
 }

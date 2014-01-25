@@ -16,6 +16,7 @@ public class TestListBorrowing {
         Phone phone = new Phone("os");
         Tablet tab = new Tablet("os");
         
+        System.out.println(lr.getReservations().toString());
         System.out.println("Nombre de reservation de laptop: " + lb.getNombreReserveOf(lap));
         System.out.println("Nombre de reservation de phone: " + lb.getNombreReserveOf(phone));
         System.out.println("Nombre de reservation de tablet: "+ lb.getNombreReserveOf(tab));

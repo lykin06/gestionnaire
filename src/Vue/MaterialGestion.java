@@ -9,7 +9,6 @@ import Gestion.ListReparation;
 import Gestion.ListReservations;
 import Gestion.Manager;
 import Gestion.Reparation;
-import Gestion.Reservation;
 import Material.Material;
 import Personnel.Administrator;
 
@@ -176,27 +175,10 @@ public class MaterialGestion {
         str.append(listMaterial.toString());
 
         if (withResa) {
-            str.append("\nListe des reservations acceptes :\n");
-            str.append(this.displayReservationsAccepted());
+            str.append("\nListe des reservations :\n");
+            str.append(this.listReservations.toString());
             str.append("\nListe des reparations en cours : \n");
             str.append(this.listReparations.toString());
-        }
-        return str.toString();
-    }
-
-    /**
-     * <b>Show the material in reservation</b>
-     */
-    private String displayReservationsAccepted() {
-        ArrayList<Reservation> res = this.listReservations.getReservations();
-        StringBuilder str = new StringBuilder();
-
-        for (int i = 0; i < res.size(); i++) {
-            if (res.get(i).isAccepted()) {
-                str.append(i);
-                str.append(" - ");
-                str.append(res.get(i).toString());
-            }
         }
         return str.toString();
     }

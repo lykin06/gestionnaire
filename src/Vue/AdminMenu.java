@@ -155,10 +155,7 @@ public class AdminMenu {
             this.emprunteur();
             break;
         case 3:
-        	System.out
-        			.println("Actuellement l'emprunteur qui ne respecte pas les delais est: " 
-        						+this.listBorrowing.emprunteur().getFirstName()
-        					+" "+this.listBorrowing.emprunteur().getName());
+        	this.listBorrowing.emprunteur();
             break;
         default:
             break;

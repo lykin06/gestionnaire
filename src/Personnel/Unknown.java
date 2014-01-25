@@ -10,12 +10,14 @@ package Personnel;
  * @author Mathieu BOUTELIER
  * 
  */
-@SuppressWarnings("serial")
 public class Unknown extends Personnel {
+
+    private static final long serialVersionUID = 104824784212085428L;
+
     /**
      * user's type (can be Administrator, Student or Teacher)
      */
-    private String type;			//TODO virer le Warning
+    private String type;
     
     public Unknown(String type, String firstName, String name, String email,
             String password, int identifiant) {
@@ -26,5 +28,9 @@ public class Unknown extends Personnel {
     @Override
     public String toString() {
         return "inconnu";
+    }
+    
+    public String getType() {
+        return type;
     }
 }

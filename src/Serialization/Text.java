@@ -65,7 +65,6 @@ abstract public class Text {
 		FileReader file = null;
 
 		String[] res = null;
-		String str;
 		int cpt = 0;
 
 		name = "Data/" + name + ".txt";
@@ -74,8 +73,8 @@ abstract public class Text {
 			file = new FileReader(name);
 			in = new BufferedReader(file);
 
-			while ((str = in.readLine()) != null) {
-				cpt++;
+			while (in.readLine() != null) {
+				++cpt;
 			}
 
 			res = new String[cpt];
@@ -83,7 +82,7 @@ abstract public class Text {
 			file = new FileReader(name);
 			in = new BufferedReader(file);
 
-			for (int i = 0; i < cpt; i++) {
+			for (int i = 0; i < cpt; ++i) {
 				res[i] = in.readLine();
 			}
 

@@ -10,7 +10,6 @@ enseignant ; Igor ; Litovsky ; lito@polytech.unice.fr ; igor ; 6 ; 0
 administrateur ; ARE ;   ;   ;   ; 7 ; 0
 administrateur ;   ;   ;   ;   ; 7 ; 0
 etudiant ; Mathieu ; Boutelier ; lykin06@gmail.com ; passe ; 15 ; 0
-enseignant ; professeur ; tournesol ; 4321 ; 21 ; 21
 enseignant ; professeur ; tournesol ; 4321 ; 21 ; 21 ; 0
 
 

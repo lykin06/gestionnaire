@@ -9,7 +9,6 @@ import Gestion.ListReservations;
 import Gestion.Manager;
 import Gestion.Reservation;
 import Personnel.Administrator;
-import Personnel.Borrower;
 
 /**
  * <b>AdminMenu class<b>

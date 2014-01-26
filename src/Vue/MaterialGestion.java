@@ -10,6 +10,7 @@ import Gestion.ListReservations;
 import Gestion.Manager;
 import Gestion.Reparation;
 import Material.Material;
+import Material.WithOS;
 import Personnel.Administrator;
 
 /**
@@ -52,49 +53,68 @@ public class MaterialGestion {
      * An administrator can do the following actions on materials:
      * <ul>
      * <li>Add a new material</li>
+     * <li>Add or create new type of Material</li>
      * <li>Delete a material</li>
      * <li>See the list of materials</li>
      * <li>Reset the stock and the reservation</li>
-     * TODO envois de matos en réparation
+     * <li>Send and recover material in reparation</li>
      * </ul>
      * </p>
      */
     private void managementMaterial() {
-        System.out.println("1. Ajouter un materiel.");
-        System.out.println("2. Supprimer un materiel.");
-        System.out.println("3. Envoyer du materiel en reparation.");
-        System.out.println("4. Recuperer le materiel repare.");
-        System.out.println("5. Afficher la liste des materiels");
+        System.out.println("1. Ajouter du materiel.");
+        System.out.println("2. Ajouter un nouveau type de materiel.");
+        System.out.println("3. Creer un nouveau type de materiel.");
+        System.out.println("4. Supprimer un materiel.");
+        System.out.println("5. Envoyer du materiel en reparation.");
+        System.out.println("6. Recuperer le materiel repare.");
+        System.out.println("7. Afficher la liste des materiels");
         System.out
-                .println("6. Reinitialiser le stock de materiel (!Attention cela va Reinitialiser les reservations)");
-        System.out.println("7. Retour");
+                .println("8. Reinitialiser le stock de materiel (!Attention cela va Reinitialiser les reservations)");
+        System.out.println("9. Retour");
 
-        int value = this.manager.requestInt(1, 7);
+        int value = this.manager.requestInt(1, 9);
 
         switch (value) {
         case 1:
             this.addMaterial();
             break;
         case 2:
-            this.removeMaterial();
+            this.addNewType();
             break;
         case 3:
-            this.addReparation();
+            System.out
+                    .println("Attention, le materiel sera perdu en cas de reinitialisation.");
+            Material material = this.createMaterial();
+            ArrayList<Material> materials = this.listMaterial.getMaterials();
+            materials.add(material);
+            this.listMaterial.setMaterials(materials);
             break;
         case 4:
-            this.recoverReparation();
+            this.removeMaterial();
             break;
         case 5:
-            System.out.println(this.displayMaterials(true));
+            this.addReparation();
             break;
         case 6:
-            this.listMaterial.reinitialize();
-            this.listReservations.reinitialize();
-            if (!this.listReparations.reinitialize()) {
-                System.err.println("Store in the file failed.");
-            }
+            this.recoverReparation();
             break;
         case 7:
+            System.out.println(this.displayMaterials(true));
+            break;
+        case 8:
+            System.out
+                    .println("Etes-vous sur de vouloir reinitialiser tout votre stock ?\n1.\tOui\n2.\tNon");
+            int ask = this.manager.requestInt(1, 2);
+            if (ask == 1) {
+                this.listMaterial.reinitialize();
+                this.listReservations.reinitialize();
+                if (!this.listReparations.reinitialize()) {
+                    System.err.println("Store in the file failed.");
+                }
+            }
+            break;
+        case 9:
             new AdminMenu(database, user);
             return;
         default:
@@ -127,6 +147,51 @@ public class MaterialGestion {
                 materials.get(indice).getQuantity() + n);
 
         this.listMaterial.setMaterials(materials);
+    }
+
+    /**
+     * <b>Add new type of material</b>
+     * <p>
+     * This method can be used to add a new type of material
+     * <p>
+     */
+    private void addNewType() {
+        System.out.println("Recherche de nouveau materiel.");
+        this.listMaterial.addNewMaterial();
+    }
+
+    /**
+     * <b>Create a new type of Material</b>
+     * <p>
+     * This method create a new type of material. In case of resetting of the
+     * application you will loose all the type created with this method. If you
+     * don't want to loose them, you have to add them manually in the code and
+     * use the {@link MaterialGestion#addNewType()} method to add it.
+     * </p>
+     * 
+     * @return
+     */
+    private Material createMaterial() {
+        System.out.println("Entrez le nom de votre materiel:");
+        String name = this.manager.requestString();
+
+        System.out.println("Entrez la duree maximale d'un emprunt (max 21):");
+        int duration = this.manager.requestInt(1, 21);
+
+        System.out.println("Entrez le nombre de materiel (max 100)");
+        int number = this.manager.requestInt(1, 100);
+
+        System.out
+                .println("Votre materiel a-t-il besoin d'un OS ?\n1.\tOui\n2.\tNon");
+        int askOs = this.manager.requestInt(1, 2);
+
+        if (askOs == 1) {
+            System.out.println("Entrez le nom de l'OS:");
+            String os = this.manager.requestString();
+            return new WithOS(os, name, duration, number);
+        } else {
+            return new Material(name, duration, number);
+        }
     }
 
     /**
@@ -189,28 +254,30 @@ public class MaterialGestion {
     private void addReparation() {
         ArrayList<Material> materials = this.listMaterial.getMaterials();
         System.out.println(this.displayMaterials(false));
-        System.out.println("Quel materiel faut-il envoyer en reparation ? (0 pour quitter)");
+        System.out
+                .println("Quel materiel faut-il envoyer en reparation ? (0 pour quitter)");
 
         int indice = this.manager.requestInt(0, materials.size()) - 1;
-        if(!(indice==-1)){
-	        Material material = materials.get(indice);
-	
-	        if (material.isEmpty()) {
-	            System.out.println("Aucun materiel a enlever.");
-	            return;
-	        }
-	
-	        int max = material.getQuantity();
-	        System.out
-	                .println("Combien de materiel voulez-vous envoyer en reparation ? (maximum "
-	                        + max + ") (-1 pour quitter)");
-	        int quantity = manager.requestInt(-1, max);
-	        
-	        if(!(quantity==-1)){
-		        listReparations.add(new Reparation(material, quantity));
-		        listMaterial.getMaterials().get(indice).setQuantity(max - quantity);
-		        listMaterial.store();
-	        }
+        if (!(indice == -1)) {
+            Material material = materials.get(indice);
+
+            if (material.isEmpty()) {
+                System.out.println("Aucun materiel a enlever.");
+                return;
+            }
+
+            int max = material.getQuantity();
+            System.out
+                    .println("Combien de materiel voulez-vous envoyer en reparation ? (maximum "
+                            + max + ") (-1 pour quitter)");
+            int quantity = manager.requestInt(-1, max);
+
+            if (!(quantity == -1)) {
+                listReparations.add(new Reparation(material, quantity));
+                listMaterial.getMaterials().get(indice)
+                        .setQuantity(max - quantity);
+                listMaterial.store();
+            }
         }
     }
 
@@ -237,11 +304,11 @@ public class MaterialGestion {
                 int quantity = materials.get(indice).getQuantity()
                         + reparation.getNumber();
                 materials.get(indice).setQuantity(quantity);
-                
+
                 this.listReparations.remove(reparation);
             }
         }
-        
+
         this.listMaterial.setMaterials(materials);
     }
 

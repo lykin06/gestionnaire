@@ -6,6 +6,7 @@ import Material.Camera;
 import Material.Headphone;
 import Material.Laptop;
 import Material.Material;
+import Material.Microphone;
 import Material.Phone;
 import Material.Tablet;
 import Serialization.Data;
@@ -96,6 +97,8 @@ public class ListMaterial {
                 return true;
             if (material instanceof Camera)
                 return true;
+            if (material instanceof Microphone)
+                return true;
         }
 
         if (material.getQuantity() == 0)
@@ -111,6 +114,7 @@ public class ListMaterial {
         materials = new ArrayList<Material>();
         materials.add(new Camera());
         materials.add(new Headphone());
+        materials.add(new Microphone());
         materials.add(new Laptop("GNU/Linux"));
         materials.add(new Laptop("Windows"));
         materials.add(new Laptop("MAC"));

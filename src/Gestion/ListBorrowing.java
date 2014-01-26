@@ -6,6 +6,7 @@ import Material.Camera;
 import Material.Headphone;
 import Material.Laptop;
 import Material.Material;
+import Material.Microphone;
 import Material.Phone;
 import Material.Tablet;
 import Personnel.Borrower;
@@ -104,6 +105,7 @@ public class ListBorrowing {
         String os = "os";
         Camera cam = new Camera();
         Headphone head = new Headphone();
+        Microphone micro = new Microphone();
         Laptop lap = new Laptop(os);
         Phone phone = new Phone(os);
         Tablet tab = new Tablet(os);
@@ -112,6 +114,7 @@ public class ListBorrowing {
         int nPhone = this.getNombreReserveOf(phone);
         int nTablet = this.getNombreReserveOf(tab);
         int nCamera = this.getNombreReserveOf(cam);
+        int nMicro = this.getNombreReserveOf(micro);
 
         String mat = new String();
         int first = 0;
@@ -167,6 +170,16 @@ public class ListBorrowing {
             }
         }
 
+        if (nMicro >= max) {
+            if (nMicro == max && first != 0) {
+                mat = mat + " & Micro";
+            } else {
+                max = nMicro;
+                mat = "Micro";
+                ++first;
+            }
+        }
+
         if (max == 0) {
             mat = null;
         }
@@ -216,9 +229,9 @@ public class ListBorrowing {
         if (max == 0) {
             return "Aucun emprunteur n'a de retards";
         }
-        
-        return ("Actuellement l'emprunteur avec le plus de retard est: " + b.getFirstName()
-                + " " + b.getName());
+
+        return ("Actuellement l'emprunteur avec le plus de retard est: "
+                + b.getFirstName() + " " + b.getName());
 
     }
 }
